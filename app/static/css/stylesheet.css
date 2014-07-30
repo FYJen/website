@@ -1,0 +1,139 @@
+
+/*
+* {
+	border: 1px dashed;
+}
+*/
+
+body{
+	background: #e7e7e7 url(../img/body.png) 0 0 repeat;
+}
+
+.wrapper {
+	width: 860px;
+	margin: auto;
+	display: block;
+	font-family: Verdana, sans-serif;
+}
+
+#header {
+	width: 270px;
+	float: left;
+	margin-left: 7px;
+	position: fixed;
+	display: block;
+}
+
+#banner {
+	z-index: 1;
+	float: top;
+	position: fixed;
+	display: block;
+	top: 75px;
+	width: 860px;
+	height: 38px;
+	background: #4276b6 url(../img/header.jpg) 0 0 repeat-x;
+	border: 0.5px solid #4276b6;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	box-shadow: 3px 3px 3px #888
+}
+
+#menu{
+	width: 500px;
+	float: right;
+	margin-right: 45px;
+}
+
+#menu ul {
+	margin: auto;
+}
+
+#menu ul li{
+	display: inline;
+}
+
+#menu ul li a {
+	margin-right: 10px;
+	margin-top: 5px;
+	width:100px;
+	padding-top: 3px;
+	padding-bottom: 5px;
+	text-align: center;
+	float: left;
+	border-radius: 7px;
+	text-decoration: none;
+	color: white;
+	background-color: #454444;
+}
+
+#menu ul li a:visited {
+	color: white;
+}
+
+#menu ul li a:hover {
+	color: #fff;
+	background-color: #FF4719;
+}
+
+#menu ul li.active a{
+	background-color: #FF4719;
+}
+
+
+#photo {
+	width:270px;
+	float: left;
+	position: fixed;
+	margin-top: 126px;
+	margin-left: 33px;
+	background: url(../img/hanger.png) no-repeat top center;
+}
+
+#phote #object {
+	box-shadow: 1px 1px 2px #777;
+}
+
+#photo #frame {
+	margin-top: 30px;
+	margin-left: 38px;
+	width: 180px;
+	height: 180px;
+	padding: 9px;
+	border:1px solid #7E7464;
+	background: url(../img/header.jpg) repeat;
+	border-radius: 5px;
+}
+
+#photo #canvas {
+	padding-top: 2%;
+	padding-left: 2%;
+	padding-right: 2.5%;
+	padding-bottom: 1%; 
+	border: 1px solid #958879;
+	border-radius: 5px;
+	background: #fff url(../imag/canvas-bg.png) repeat;
+	box-shadow: inset 0px 0px 1px #958879;
+}
+
+#photo img {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+#body {
+	width: 500px;
+	float: right;
+	margin-top: 120px;
+	padding-bottom: 50px;
+	display: block;
+}
+
+#footer {
+	width: 270px;
+	float: left;
+	position: fixed;
+	bottom: 50px;
+	display: block;
+}
