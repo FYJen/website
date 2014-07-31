@@ -41,9 +41,9 @@ def _generateMigrationScript(dryrun):
                                  SQLALCHEMY_MIGRATE_REPO))
     else:
         print 'Dryrun:'
-        print '\tNew migration will be as ' + migration
-        print '\tNew migration script will be:\n"\n%s"' % str(script)
-        print '\tNew database version will be: ' + str(newVersion)
+        print '\nNew migration will be as ' + migration
+        print '\nNew migration script will be:\n"\n%s"' % str(script)
+        print '\nNew database version will be: ' + str(newVersion)
 
 def _upgradeDB(expectedVersion, dryrun):
     if not dryrun:
