@@ -80,6 +80,7 @@ class Address(db.Model):
     province = db.Column(db.String(32))
     country = db.Column(db.String(32))
     postal_code = db.Column(db.String(32))
+    active = db.Column(db.Boolean, default=True)
 
     user_addr = db.relationship('User', backref='address')
     school_addr = db.relationship('School', backref='address', uselist=False)
@@ -97,7 +98,7 @@ class Skill(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text)
-    active = db.Column(db.Boolean, default=True)
+    selected = db.Column(db.Boolean, default=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
@@ -116,6 +117,8 @@ class School(db.Model):
     level = db.Column(db.String(32))
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
+    attending = db.Column(db.Boolean, default=True)
+    term = db.Column(db.String(32))
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
 
     courses = db.relationship('Course', backref='school', lazy='dynamic')
@@ -125,7 +128,7 @@ class School(db.Model):
 
 class Course(db.Model):
     """
-    A Course is a single course that a shcool offers.
+    A Course is a single course that a school offers.
 
     Courses are many-to-one with Schools.
     """
