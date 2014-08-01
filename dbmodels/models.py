@@ -1,6 +1,6 @@
 from app import db
 
-# Many-tomany table for Users and Schools.
+# Many-to-many table for Users and Schools.
 schools = db.Table('schools',
     db.Column('school_id'), db.Integer, db.ForeignKey('school.id'),
     db.Column('user_id'), db.Integer, db.ForeignKey('user.id'),
@@ -82,10 +82,10 @@ class Address(db.Model):
     postal_code = db.Column(db.String(32))
     active = db.Column(db.Boolean, default=True)
 
-    user_addr = db.relationship('User', backref='address')
-    school_addr = db.relationship('School', backref='address', uselist=False)
-    workplace_addr = db.relationship('WorkPlace', backref='address',
-                                     uselist=False)
+    users = db.relationship('User', backref='address')
+    school = db.relationship('School', backref='address', uselist=False)
+    workplace = db.relationship('WorkPlace', backref='address',
+                                uselist=False)
 
     def __repr__(self):
         return '<Address %r>' % (self.street_name)
