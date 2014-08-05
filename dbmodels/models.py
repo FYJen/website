@@ -2,13 +2,13 @@ from app import db
 
 # Many-to-many table for Users and Schools.
 schools = db.Table('schools',
-    db.Column('school_id'), db.Integer, db.ForeignKey('school.id'),
-    db.Column('user_id'), db.Integer, db.ForeignKey('user.id'),
+    db.Column('school_id', db.Integer, db.ForeignKey('school.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
 )
 
 class User(db.Model):
     """
-    A User is a single entity containing basic data about that person.
+    A User is a single entity containing basic information about that person.
 
     Users are many-to-many with Schools.
     Users are many-to-one with Addresses.

@@ -8,7 +8,6 @@ from db_config import SQLALCHEMY_DATABASE_URI
 from db_config import SQLALCHEMY_MIGRATE_REPO
 from app import db
 
-
 def _creatDB(dryrun):
     db.create_all()
     if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
