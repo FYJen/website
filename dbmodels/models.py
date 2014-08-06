@@ -42,6 +42,7 @@ class WorkPlace(db.Model):
     WorkPlaces are one-to-one with Addresses.
     WorkPlaces are many-to-one with Users.
     """
+    __tablename__ = 'workplace'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32))
     start_date = db.Column(db.DateTime)
@@ -76,7 +77,10 @@ class Address(db.Model):
     Addresses are one-to-one with Schools.
     """
     id = db.Column(db.Integer, primary_key=True)
+    apt_number = db.Column(db.String(32))
+    suite_number = db.Column(db.String(32))
     street_name = db.Column(db.String(32))
+    city = db.Column(db.String(32))
     province = db.Column(db.String(32))
     country = db.Column(db.String(32))
     postal_code = db.Column(db.String(32))
@@ -90,15 +94,27 @@ class Address(db.Model):
     def __repr__(self):
         return '<Address %r>' % (self.street_name)
 
+class Tag(db.Model):
+    """A Tag is a type of skill.
+
+    Tags are one-to-many with SKills.
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32), nullable=False)
+
+    skills = db.relationship('Skill', backref='tag', lazy='dynamic')
+
 class Skill(db.Model):
     """
     A Skill is a single technique that a person possesses.
 
     Skills are many-to-one with Users.
+    Skills are many-to-one with Tags.
     """
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text)
     selected = db.Column(db.Boolean, default=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
