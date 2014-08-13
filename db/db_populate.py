@@ -1,3 +1,5 @@
+from default_config import *
+
 from app import db, models
 
 class Populate(object):
@@ -5,21 +7,19 @@ class Populate(object):
     """
     @classmethod
     def user(cls):
-        user_kwargs = {
-            'first_name': 'Fei-Yang',
-            'last_name': 'Jen',
-            'email': 'fjen@uwaterloo.ca',
-            'phone': '(226) 972-0522',
-            'address_id': 1
-        }
-        user = models.User(**user_kwargs)
+        for k, v in USER_LIST.iteritems():
+            k = models.User(**v)
+            db.session.add(k)
 
-        db.session.add(user)
         db.session.commit()
 
     @classmethod
     def workPlace(cls):
-        pass
+        for k, v in WORKPLACE_LIST.iteritems():
+            k = models.WorkPlace(**v)
+            db.session.add(k)
+
+        db.session.commit()
 
     @classmethod
     def workTask(cls):
@@ -29,41 +29,50 @@ class Populate(object):
     def address(cls):
         """Generate addresses and insert them into database.
         """
-        user_kwargs = {
-            'suite_number': '302',
-            'street_name': '321 Lester St.',
-            'city': 'Waterloo',
-            'province': 'ON',
-            'postal_code': 'N2L 3W6',
-            'country': 'Canada'
-        }
-        user_address = models.Address(**user_kwargs)
+        for k, v in ADDRESS_LIST.iteritems():
+            k = models.Address(**v)
+            db.session.add(k)
 
-        school_kwargs = {
-            'street_name': '200 University Ave W',
-            'city': 'Waterloo',
-            'province': 'ON',
-            'postal_code': 'N2L 3G1',
-            'country': 'Canada'
-        }
-        school_address = models.Address(**school_kwargs)
-
-        db.session.add_all([user_address, school_address])
         db.session.commit()
 
     @classmethod
     def tag(cls):
         """Generate a list of tags and insert them into database.
         """
-        for tag in ['Python', 'Ruby', 'Ruby on Rails', 'C', 'C++', 'Bash', 'Web'
-                    'Database', 'Cloud', 'Perl', 'Tools', 'Server']:
+        for tag in TAGS_LIST:
             tag = models.Tag(name=tag)
             db.session.add(tag)
         db.session.commit()
 
     @classmethod
     def skill(cls):
-        pass
+        """Generate skills and attach them with specific user and tag, then insert
+        them into database.
+        """
+        tag_id_mapping = dict((v, k) for k, v in enumerate(TAGS_LIST, start=1))
+        tag_skills_mapping = {
+            'Python': [PYTHON_LIST],
+            'Ruby on Rails': [RUBY_LIST],
+            'C++/C': [C_LIST, CPP_LIST],
+            'Others': [OTHER_LIST],
+            'Database': [DATABASE_LIST],
+            'Server': [SERVER_LIST],
+            'Cloud': [CLOUD_LIST],
+            'Tools': [TOOLS_LIST]
+        }
+
+        for tag, skills in tag_skills_mapping.iteritems():
+            for i in skills:
+                for item in i:
+                    item_kargs = {
+                        'description': item,
+                        'tag_id': tag_id_mapping[tag],
+                        'user_id': 1
+                    }
+                    item = models.Skill(**item_kargs)
+                    db.session.add(item)
+
+        db.session.commit()
 
     @classmethod
     def school(cls):
@@ -95,3 +104,5 @@ if __name__ == '__main__':
     Populate.address()
     Populate.user()
     Populate.tag()
+    Populate.skill()
+    Populate.workPlace()
