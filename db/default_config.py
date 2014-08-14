@@ -61,12 +61,15 @@ USER_LIST = {
         'last_name': 'Jen',
         'email': 'fjen@uwaterloo.ca',
         'phone': '(226) 972-0522',
+        'github': 'https://github.com/FYJen',
+        'linkedin': 'https://www.linkedin.com/pub/arthur-jen/56/528/914',
         'address_id': ADDRESS_LIST['user_address']['id']
     }
 }
 
 WORKPLACE_LIST = {
     'inkling_intern_1': {
+        'id': 1,
         'name': 'Inkling',
         'position_title': 'Cloud Engineering Intern',
         'start_date': datetime(2014, 5, 1),
@@ -75,6 +78,7 @@ WORKPLACE_LIST = {
         'user_id': USER_LIST['main_user']['id']
     },
     'inkling_intern_2': {
+        'id': 2,
         'name': 'Inkling',
         'position_title': 'Web Ops Engineering Intern',
         'start_date': datetime(2013, 9, 1),
@@ -83,6 +87,7 @@ WORKPLACE_LIST = {
         'user_id': USER_LIST['main_user']['id']
     },
     'OICR_intern': {
+        'id': 3,
         'name': 'Ontario Institute for Cancer Research',
         'initial': 'OICR',
         'position_title': 'Cloud Computing Software Developer',
@@ -92,6 +97,7 @@ WORKPLACE_LIST = {
         'user_id': USER_LIST['main_user']['id']
     },
     'Awareness_intern': {
+        'id': 4,
         'name': 'Awareness Inc.',
         'position_title': 'Cloud Operation Analyst',
         'start_date': datetime(2012, 5, 1),
@@ -100,6 +106,7 @@ WORKPLACE_LIST = {
         'user_id': USER_LIST['main_user']['id']
     },
     'NCHC_intern': {
+        'id': 5,
         'name': 'National Center for High-Performance Computing',
         'initial': 'NCHC',
         'position_title': 'Project Engineering Assistant',
@@ -107,6 +114,88 @@ WORKPLACE_LIST = {
         'end_date': datetime(2011, 12, 31),
         'address_id': ADDRESS_LIST['NCHC_address']['id'],
         'user_id': USER_LIST['main_user']['id']
+    }
+}
+
+WORKTASK_LIST = {
+    'inkling_intern_1': [
+        'Implemented features for backend services of Inkling Habitat with Python and Ruby',
+        'Refactored existing code to incorporate new workflows',
+        'Temporary place holder !!'
+    ],
+    'inkling_intern_2': [
+        'Developed and fixed internal workflows and tools with Python and JavaScript',
+        'Participated daily production deployments and maintenance of Cloud environments',
+        'Implemented a job scheduler with open-source Azkaban Server and AWS EMR'
+    ],
+    'OICR_intern': [
+        'Improved software Installation time by 50% to 80% with Bash',
+        'Built applications to deploy scalable SGE Cluster with NFS on GCE with Perl',
+        'Created generic application to launch scalable environments on AWS'
+    ],
+    'Awareness_intern': [
+        'Implemented a private Cloud with CloudStack and LDAP to provide IaaS locally',
+        'Deployed scalable Cloud environment with Alarm Cloak, SQS, S3 and Load-Balance on AWS',
+        'Performed benchmarking on database and disk I/O on Amazon and RackSpace'
+    ],
+    'NCHC_intern': [
+        'Configured DNS with geo-location feature to distribute client connections',
+        'Implemented load-balancer using HAproxy, Dstat and third-party libraries',
+        'Co-Developed Cloud storage service nation-wide'
+    ]
+}
+
+PROJECT_LIST = {
+    'personal_webiste': {
+        'id': 1,
+        'name': 'Personal Website',
+        'user_id': USER_LIST['main_user']['id'],
+        'thumbnail': 'Temporary place holder !!',
+        'start_date': datetime(2014, 7, 15)
+    },
+    'youtube_playlist_curl': {
+        'id': 2,
+        'name': 'YouTube Playlist Curl',
+        'user_id': USER_LIST['main_user']['id'],
+        'thumbnail': 'Temporary place holder !!',
+        'start_date': datetime(2014, 5, 15)
+    },
+    'eat_all_candy': {
+        'id': 3,
+        'name': 'Eat all Candies (Cut the Rope version)',
+        'user_id': USER_LIST['main_user']['id'],
+        'thumbnail': 'Temporary place holder !!',
+        'start_date': datetime(2013, 10, 15)
+    }
+}
+
+PROJECTTASK_LIST = {
+    'personal_webiste': [
+        'A personal website containing information about myself. Many proofs of concept are done in this playground',
+        'Hosted on AWS and built with Python, Flask framework, SQLAlchemy, Jinja2 Template, Docker, Redis, SQLite, Bootstrap, HTML, CSS and Nginx'
+    ],
+    'youtube_playlist_curl': [
+        'An application that will curl a YouTube playlist and download individual songs by posting requests to youtube-mp3.org',
+        'Built with Python and Google YouTube Data API (V3)'
+    ],
+    'eat_all_candy': [
+        'An easy game built during the free time. The game is about collecting candies dropping from the sky and dodging obstacles',
+        'Built with Python and Pygame engine'
+    ]
+}
+
+SCHOOL_LIST = {
+    'school_1': {
+        'id': 1,
+        'name': 'University of Waterloo',
+        'level': 'University/College',
+        'degree': 'Bachelor of Computer Science',
+        'major': 'Computer Science',
+        'minor': 'Economics',
+        'start_date': datetime(2010, 9, 10),
+        'end_date': datetime(2015, 8, 31),
+        'term': '4A',
+        'address_id': ADDRESS_LIST['school_address']['id']
     }
 }
 
