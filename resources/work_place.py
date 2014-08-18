@@ -112,7 +112,9 @@ class Workplace(object):
                 workPlaceDict['user'] = user
 
             if 'tasks' in deref:
-                pass
+                workTasks = dict((k, v.description) for k, v in
+                                  enumerate(workPlace.work_tasks, start=1))
+                workPlaceDict['tasks'] = workTasks
 
             if 'address' in deref:
                 pass
@@ -120,4 +122,3 @@ class Workplace(object):
             workPlaceDicts.append(workPlaceDict)
 
         return workPlaceDicts
-
