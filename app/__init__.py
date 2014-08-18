@@ -11,5 +11,5 @@ CONFIG_FILE = os.environ.get('PRODUCTION_CONFIG', DEV_CONFIG)
 ajen_webSite.config.from_object(CONFIG_FILE)
 db = SQLAlchemy(ajen_webSite)
 
-from app.views import views, error_views
+from app.views import views, api_views, error_views
 from dbmodels import models
