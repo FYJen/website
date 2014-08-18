@@ -1,7 +1,7 @@
-from app import ajen_webSite, db
-from dbmodels import models
-from app.config import default_config as setting
 from flask import render_template
+
+from app import ajen_webSite
+from app.config import default_config as setting
 
 @ajen_webSite.route('/', methods=['GET'])
 @ajen_webSite.route('/about/', methods=['GET'])
