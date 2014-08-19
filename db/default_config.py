@@ -3,7 +3,7 @@ from datetime import datetime
 ADDRESS_LIST = {
     'user_address': {
         'id': 1,
-        'suite_number': '302',
+        'suite_number': 'Suite 302',
         'street_name': '321 Lester St.',
         'city': 'Waterloo',
         'province_state': 'ON',
@@ -20,7 +20,7 @@ ADDRESS_LIST = {
     },
     'inkling_address': {
         'id': 3,
-        'floor': '4th',
+        'floor': '4th Floor',
         'street_name': '153 Kearny St.',
         'city': 'San Francisco',
         'province_state': 'CA',
@@ -29,7 +29,7 @@ ADDRESS_LIST = {
     },
     'OICR_address': {
         'id': 4,
-        'suite_number': '510',
+        'suite_number': 'Suite 510',
         'street_name': '661 University Ave.',
         'city': 'Toronto',
         'province_state': 'ON',

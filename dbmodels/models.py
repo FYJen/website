@@ -25,7 +25,7 @@ class User(db.Model):
     linkedin = db.Column(db.String(64), unique=True)
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
 
-    work_places = db.relationship('WorkPlace', backref='employee', lazy='dynamic')
+    workPlaces = db.relationship('WorkPlace', backref='employee', lazy='dynamic')
     skills = db.relationship('Skill', backref='possessor', lazy='dynamic')
     projects = db.relationship('Project', backref='owner', lazy='dynamic')
     schools = db.relationship('School', secondary=users_schools,
@@ -94,7 +94,7 @@ class Address(db.Model):
 
     users = db.relationship('User', backref='address')
     school = db.relationship('School', backref='address', uselist=False)
-    work_place = db.relationship('WorkPlace', backref='address',
+    workPlace = db.relationship('WorkPlace', backref='address',
                                  uselist=False)
 
     def __repr__(self):
