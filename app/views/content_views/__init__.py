@@ -1,0 +1,1 @@
+from app.views.content_views import content_views
