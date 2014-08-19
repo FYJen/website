@@ -1,7 +1,6 @@
-from dbmodels import models
 from collections import OrderedDict
-from flask import jsonify
 
+from dbmodels import models
 from lib import status
 
 DEREF_LIST = ['workplace']
@@ -11,10 +10,10 @@ class Worktask(object):
     """
     @classmethod
     def get(cls, workTaskId, deref=[]):
-        """Get workTask by workTaskId.
+        """Get WorkTask by workTaskId.
 
         Args:
-            workTaskId - A specified workTask Id.
+            workTaskId - A specified WorkTask Id.
             deref - A list of fields to deref.
 
         Returns:
@@ -26,11 +25,11 @@ class Worktask(object):
         if not workTask:
             raise status.ResourceNotFound('WorkTask', resourceId=workTaskId)
 
-        return cls.__to_Dict([workTask], deref)[0]
+        return cls._to_Dict([workTask], deref)[0]
 
     @classmethod
     def find(cls, workPlaceName=None, initial=None, deref=[]):
-        """Find workTasks that meet the expected query parameters.
+        """Find WorkTasks that meet the expected query parameters.
 
         Args:
             workPlaceName - The name of the company.
@@ -47,7 +46,7 @@ class Worktask(object):
         for field in ['name', 'initial']:
             if query_params[field] is None:
                 del query_params[field]
-        
+
         workPlaceIds = [workPlace.id for workPlace in
                         models.WorkPlace.query.filter_by(**query_params).all()]
 
@@ -62,18 +61,18 @@ class Worktask(object):
                                           'workPlaceName - %s, does not contain any '
                                           'task' % workPlaceName)
 
-        return cls.__to_Dict(workTasks, deref)
+        return cls._to_Dict(workTasks, deref)
 
     @classmethod
     def update(cls, workTaskId, **kwargs):
-        """Update specified workTask with given arguments. 
+        """Update specified WorkTask with given arguments.
         """
         raise NotImplementedError('WorkTask Resource - update method is currently '
                                   'not supported.')
 
     @classmethod
     def create(cls, description=None, workplace_id=None):
-        """Create a new workTask entry.
+        """Create a new WorkTask entry.
         """
         raise NotImplementedError('WorkTask Resource - create method is currently '
                                   'not supported.')
@@ -87,11 +86,11 @@ class Worktask(object):
                 derefList.remove(deref)
 
     @classmethod
-    def __to_Dict(cls, workTaskObjects, deref):
-        """Serialized a list of workTask objects.
+    def _to_Dict(cls, workTaskObjects, deref):
+        """Serialized a list of WorkTask objects.
 
         Args:
-            workTaskObjects - A list of workTask ORM objects.
+            workTaskObjects - A list of WorkTask ORM objects.
             deref - A list of fields to deref.
 
         Returns:
@@ -110,7 +109,7 @@ class Worktask(object):
                     workPlaceCache.update({
                         workTask.workplace_id: workTask.workplace.name
                     })
-                
+
                 workTaskDict['workPlace'] = workPlaceCache[workTask.workplace_id]
 
             workTaskDicts.append(workTaskDict)

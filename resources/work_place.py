@@ -1,8 +1,8 @@
-from dbmodels import models
 from collections import OrderedDict
-from flask import jsonify
 
+from dbmodels import models
 from lib import status
+from resources.address import Address
 
 DEREF_LIST = ['user', 'tasks', 'address']
 
@@ -11,10 +11,10 @@ class Workplace(object):
     """
     @classmethod
     def get(cls, workPlaceId, deref=[]):
-        """Get workPlace by workPlaceId.
+        """Get WorkPlace by workPlaceId.
 
         Args:
-            workPlaceId - A specified workPlace Id.
+            workPlaceId - A specified WorkPlace Id.
             deref - A list of fields to deref.
 
         Returns:
@@ -26,12 +26,12 @@ class Workplace(object):
         if not workPlace:
             raise status.ResourceNotFound('WorkPlace', resourceId=workPlaceId)
 
-        return cls.__to_Dict([workPlace], deref)[0]
+        return cls._to_Dict([workPlace], deref)[0]
 
     @classmethod
     def find(cls, name=None, initial=None, positionTitle=None,
              deref=[]):
-        """Find workPlaces that meet the expected query parameters.
+        """Find WorkPlaces that meet the expected query parameters.
 
         Args:
             name - The name of the company.
@@ -57,11 +57,11 @@ class Workplace(object):
         if not workPlaces:
             raise status.ResourceNotFound('WorkPlace', query_params=query_params)
 
-        return cls.__to_Dict(workPlaces, deref)
+        return cls._to_Dict(workPlaces, deref)
 
     @classmethod
     def update(cls, workPlaceId, **kwargs):
-        """Update specified workPlace with given arguments. 
+        """Update specified WorkPlace with given arguments.
         """
         raise NotImplementedError('WorkPlace Resource - update method is currently '
                                   'not supported.')
@@ -69,7 +69,7 @@ class Workplace(object):
     @classmethod
     def create(cls, name=None, initial=None, positionTitle=None, startDate=None,
                endDate=None, addressId=None, userId=1):
-        """Create a new workPlace entry.
+        """Create a new WorkPlace entry.
         """
         raise NotImplementedError('WorkPlace Resource - create method is currently '
                                   'not supported.')
@@ -83,11 +83,11 @@ class Workplace(object):
                 derefList.remove(deref)
 
     @classmethod
-    def __to_Dict(cls, workPlaceObjects, deref):
-        """Serialized a list of workPlace objects.
+    def _to_Dict(cls, workPlaceObjects, deref):
+        """Serialized a list of WorkPlace objects.
 
         Args:
-            workPlaceObjects - A list of workPlace ORM objects.
+            workPlaceObjects - A list of WorkPlace ORM objects.
             deref - A list of fields to deref.
 
         Returns:
@@ -108,16 +108,16 @@ class Workplace(object):
             ])
 
             if 'user' in deref:
-                user = workPlace.employee.email
-                workPlaceDict['user'] = user
+                workPlaceDict['user'] = workPlace.employee.email
 
             if 'tasks' in deref:
-                workTasks = dict((k, v.description) for k, v in
-                                  enumerate(workPlace.work_tasks, start=1))
-                workPlaceDict['tasks'] = workTasks
+                workPlaceDict['tasks'] = \
+                    dict((k, v.description) for k, v in
+                         enumerate(workPlace.work_tasks, start=1))
 
             if 'address' in deref:
-                pass
+                workPlaceDict['address'] = \
+                    Address._to_Dict([workPlace.address], True, [])
 
             workPlaceDicts.append(workPlaceDict)
 
