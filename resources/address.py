@@ -3,7 +3,7 @@ from collections import OrderedDict
 from dbmodels import models
 from lib import status as custom_status
 
-DEREF_LIST = ['users', 'work_place', 'school']
+DEREF_LIST = ['occupants']
 
 class Address(object):
     """Address resources.
@@ -14,6 +14,7 @@ class Address(object):
 
         Args:
             addressId - A specified Address Id.
+            stringlized - Whether to flatten addresses.
             deref - A list of fields to deref.
 
         Returns:
@@ -28,7 +29,8 @@ class Address(object):
         return cls._to_Dict([address], stringlized, deref)[0]
 
     @classmethod
-    def find(cls, active=None, country=None, postalCode=None, zip=None):
+    def find(cls, active=None, country=None, postalCode=None, zipCode=None,
+             stringlized=False, deref=[]):
         """Find Addresses that meet the expected query parameters.
 
         Args:
@@ -36,11 +38,33 @@ class Address(object):
             country - The country of the Address.
             postalCode - The postal code of the Address if in Canada.
             zip - The zip code of the Address if in USA.
+            stringlized - Whether to flatten addresses.
+            deref - A list of fields to deref.
 
         Returns:
             A list of matched and serialized Address objects.
         """
-        pass
+        cls.__validateDeref(deref)
+        if postalCode and zipCode:
+            msg = 'postalCode and zipCode cannot be specified at the same time.'
+            raise custom_status.InvalidRequest('Address', Detail=msg)
+
+        query_params = {
+            'active': active,
+            'country': country,
+            'postalcode_zip': (postalCode or zipCode)
+        }
+        for field in query_params.keys():
+            if query_params[field] is None:
+                del query_params[field]
+
+        addresses = models.Address.query.filter_by(**query_params).all()
+
+        if not addresses:
+            raise custom_status.ResourceNotFound('Address',
+                                                 query_params=query_params)
+
+        return cls._to_Dict(addresses, stringlized, deref)
 
     @classmethod
     def update(cls, addressId, **kwargs):
@@ -72,6 +96,7 @@ class Address(object):
 
         Args:
             addressObjects - A list of Address ORM objects.
+            stringlized - Whether to flatten addresses.
             deref - A list of fields to deref.
 
         Returns:
@@ -99,18 +124,21 @@ class Address(object):
                 ('country', address.country),
                 ('postalCode/zip', address.postalcode_zip),
                 ('active', address.active),
-                ('currentOwnerOrTenants', [])
+                ('occupants', set())
             ])
 
-            if 'users' in deref:
-                for user in address.users:
-                    addressDict['currentOwnerOrTenants'].append(user.email)
+            if 'occupants' in deref:
+                for possibleOccupant in ['users', 'school', 'workPlace']:
+                    result = getattr(address, possibleOccupant)
+                    if isinstance(result, list):
+                        for occupant in result:
+                            addressDict['occupants'].add(occupant.email)
+                    elif result:
+                        addressDict['occupants'].add(result.name)
 
-            if 'school' in deref:
-                addressDict['currentOwnerOrTenants'].append(address.school.name)
-
-            if 'workPlace' in deref:
-                addressDict['currentOwnerOrTenants'].append(address.workPlace.name)
+            # Since set object is not JSON serializable, we covnert it to list
+            # object.
+            addressDict['occupants'] = list(addressDict['occupants'])
 
             if stringlized:
                 addressDict['stringlizedAddr'] = stringlizedAddress(addressDict)
