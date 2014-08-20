@@ -2,7 +2,6 @@ import json
 from flask import request
 
 from app import ajen_webSite
-from lib import status as custom_status
 from resources.work_place import Workplace
 
 @ajen_webSite.route('/api/workplace/<int:workplace_id>/', methods=['GET'])
@@ -10,7 +9,7 @@ def workplace_get(workplace_id):
     deref = request.args.getlist('deref')
     try:
         result = Workplace.get(workplace_id, deref=deref)
-    except custom_status.ResourceNotFound as e:
+    except Exception as e:
         result = e.errors
 
     return json.dumps({'result': result})
@@ -25,7 +24,7 @@ def workplace_find():
     }
     try:
         result = Workplace.find(**query_params)
-    except custom_status.ResourceNotFound as e:
+    except Exception as e:
         result = e.errors
 
     return json.dumps({'result': result})

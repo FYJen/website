@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from dbmodels import models
-from lib import status
+from lib import status as custom_status
 from resources.address import Address
 
 DEREF_LIST = ['user', 'tasks', 'address']
@@ -24,7 +24,7 @@ class Workplace(object):
         workPlace = models.WorkPlace.query.get(workPlaceId)
 
         if not workPlace:
-            raise status.ResourceNotFound('WorkPlace', resourceId=workPlaceId)
+            raise custom_status.ResourceNotFound('WorkPlace', resourceId=workPlaceId)
 
         return cls._to_Dict([workPlace], deref)[0]
 
@@ -48,14 +48,15 @@ class Workplace(object):
             'position_title': positionTitle
         }
 
-        for field in ['name', 'initial', 'position_title']:
+        for field in query_params.keys():
             if query_params[field] is None:
                 del query_params[field]
 
         workPlaces = models.WorkPlace.query.filter_by(**query_params).all()
 
         if not workPlaces:
-            raise status.ResourceNotFound('WorkPlace', query_params=query_params)
+            raise custom_status.ResourceNotFound('WorkPlace',
+                                                 query_params=query_params)
 
         return cls._to_Dict(workPlaces, deref)
 
