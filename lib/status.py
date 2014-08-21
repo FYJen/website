@@ -1,23 +1,32 @@
-"""Custom Exceptions.
+"""Custom Status.
 """
+class CustomStatus(Exception):
+    """
+    """
+    def __init__(self, msg=None, details={}, result={}):
+        self.statusCode = self.__class__.__name__
+        self.statusMsg = msg
+        self.statusDetails = details
+        self.result = result
 
-class ResourceNotFound(Exception):
-    def __init__(self, resourceType, **kwargs):
-        errMessage = {
-            'statusMessage': 'Resource Not Found',
-            'resourceType': resourceType
+    def toDict(self):
+        return {
+            'result': self.result,
+            'status': {
+                'statusCode': self.statusCode,
+                'statusMsg': self.statusMsg,
+                'statusDetails': self.statusDetails
+            }
         }
-        for k, v in kwargs.iteritems():
-            errMessage[k] = v
-        self.errors = errMessage
 
-class InvalidRequest(Exception):
-    def __init__(self, resourceType, **kwargs):
-        errMessage = {
-            'statusMessage': 'Invalid Request',
-            'resourceType': resourceType
-        }
-        for k, v in kwargs.iteritems():
-            errMessage[k] = v
-        self.errors = errMessage
+class HTTPOk(CustomStatus):
+    def __init__(self, msg='OK', **kwargs):
+        CustomStatus.__init__(self, msg=msg, **kwargs)
 
+class ResourceNotFound(CustomStatus):
+    def __init__(self, msg='Resource not found', **kwargs):
+        CustomStatus.__init__(self, msg=msg, **kwargs)
+
+class InvalidRequest(CustomStatus):
+    def __init__(self, msg='Inavlid request', **kwargs):
+        CustomStatus.__init__(self, msg=msg, **kwargs)

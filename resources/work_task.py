@@ -23,7 +23,8 @@ class Worktask(object):
         workTask = models.WorkTask.query.get(workTaskId)
 
         if not workTask:
-            raise custom_status.ResourceNotFound('WorkTask', resourceId=workTaskId)
+            raise custom_status.ResourceNotFound(msg='No workTask found with Id - %s'
+                                                 % workTaskId)
 
         return cls._to_Dict([workTask], deref)[0]
 
@@ -47,20 +48,16 @@ class Worktask(object):
             if query_params[field] is None:
                 del query_params[field]
 
-        workPlaceIds = [workPlace.id for workPlace in
-                        models.WorkPlace.query.filter_by(**query_params).all()]
+        workPlaces = models.WorkPlace.query.filter_by(**query_params).all()
 
-        if not workPlaceIds:
-            raise custom_status.ResourceNotFound('WorkTask',
-                                                 workPlaceName=workPlaceName)
+        if not workPlaces:
+            raise custom_status.ResourceNotFound(msg='No workTask found with given '
+                                                 'query parameters',
+                                                 details=query_params)
 
-        workTasks = models.WorkTask.query.filter(models.WorkTask.workplace_id \
-                    .in_(workPlaceIds)).all()
-
-        if not workTasks:
-            raise custom_status.ResourceNotFound('WorkTask', details='The given '
-                                          'workPlaceName - %s, does not contain any '
-                                          'task' % workPlaceName)
+        workTasks = []
+        for workPlace in workPlaces:
+            workTasks += workPlace.work_tasks
 
         return cls._to_Dict(workTasks, deref)
 

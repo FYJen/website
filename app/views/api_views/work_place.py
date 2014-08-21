@@ -2,17 +2,19 @@ import json
 from flask import request
 
 from app import ajen_webSite
+from lib import status as custom_status
 from resources.work_place import Workplace
 
 @ajen_webSite.route('/api/workplace/<int:workplace_id>/', methods=['GET'])
 def workplace_get(workplace_id):
     deref = request.args.getlist('deref')
     try:
-        result = Workplace.get(workplace_id, deref=deref)
+        workPlace = Workplace.get(workplace_id, deref=deref)
+        result = custom_status.HTTPOk(result=workPlace)
     except Exception as e:
-        result = e.errors
+        result = e
 
-    return json.dumps({'result': result})
+    return json.dumps(result.toDict())
 
 @ajen_webSite.route('/api/workplace/', methods=['GET'])
 def workplace_find():
@@ -23,8 +25,9 @@ def workplace_find():
         'deref': request.args.getlist('deref')
     }
     try:
-        result = Workplace.find(**query_params)
+        workPlaces = Workplace.find(**query_params)
+        result = custom_status.HTTPOk(result=workPlaces)
     except Exception as e:
-        result = e.errors
+        result = e
 
-    return json.dumps({'result': result})
+    return json.dumps(result.toDict())

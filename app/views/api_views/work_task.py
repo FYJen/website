@@ -2,17 +2,19 @@ import json
 from flask import request
 
 from app import ajen_webSite
+from lib import status as custom_status
 from resources.work_task import Worktask
 
 @ajen_webSite.route('/api/worktask/<int:worktask_id>/', methods=['GET'])
 def worktask_get(worktask_id):
     deref = request.args.getlist('deref')
     try:
-        result = Worktask.get(worktask_id, deref=deref)
+        workTask = Worktask.get(worktask_id, deref=deref)
+        result = custom_status.HTTPOk(result=workTask)
     except Exception as e:
-        result = e.errors
+        result = e
 
-    return json.dumps({'result': result})
+    return json.dumps(result.toDict())
 
 @ajen_webSite.route('/api/worktask/', methods=['GET'])
 def worktask_find():
@@ -22,8 +24,9 @@ def worktask_find():
         'deref': request.args.getlist('deref')
     }
     try:
-        result = Worktask.find(**query_params)
+        workTasks = Worktask.find(**query_params)
+        result = custom_status.HTTPOk(result=workTasks)
     except Exception as e:
-        result = e.errors
+        result = e
 
-    return json.dumps({'result': result})
+    return json.dumps(result.toDict())

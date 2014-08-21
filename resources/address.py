@@ -24,7 +24,8 @@ class Address(object):
         address = models.Address.query.get(addressId)
 
         if not address:
-            raise custom_status.ResourceNotFound('Address', resourceId=addressId)
+            raise custom_status.ResourceNotFound(msg='No Address found with Id - %s' \
+                                                 % addressId)
 
         return cls._to_Dict([address], stringlized, deref)[0]
 
@@ -46,8 +47,8 @@ class Address(object):
         """
         cls.__validateDeref(deref)
         if postalCode and zipCode:
-            msg = 'postalCode and zipCode cannot be specified at the same time.'
-            raise custom_status.InvalidRequest('Address', Detail=msg)
+            raise custom_status.InvalidRequest(msg='Cannot specify postalCode and '
+                                              'zipCode together')
 
         query_params = {
             'active': active,
@@ -61,8 +62,9 @@ class Address(object):
         addresses = models.Address.query.filter_by(**query_params).all()
 
         if not addresses:
-            raise custom_status.ResourceNotFound('Address',
-                                                 query_params=query_params)
+            raise custom_status.ResourceNotFound(msg='No address found with the '
+                                                'given query parameters',
+                                                details=query_params)
 
         return cls._to_Dict(addresses, stringlized, deref)
 

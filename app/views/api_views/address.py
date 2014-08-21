@@ -2,6 +2,7 @@ import json
 from flask import request
 
 from app import ajen_webSite
+from lib import status as custom_status
 from resources.address import Address
 
 @ajen_webSite.route('/api/address/<int:address_id>/', methods=['GET'])
@@ -10,11 +11,12 @@ def address_get(address_id):
     stringlized = True if request.args.get('stringlize', '').lower() == 'true' \
                  else False
     try:
-        result = Address.get(address_id, stringlized=stringlized, deref=deref)
+        address = Address.get(address_id, stringlized=stringlized, deref=deref)
+        result = custom_status.HTTPOk(result=address)
     except Exception as e:
-        result = e.errors
+        result = e
 
-    return json.dumps({'result': result})
+    return json.dumps(result.toDict())
 
 @ajen_webSite.route('/api/address/', methods=['GET'])
 def address_find():
@@ -29,8 +31,9 @@ def address_find():
     }
 
     try:
-        result = Address.find(**query_params)
+        addresses = Address.find(**query_params)
+        result = custom_status.HTTPOk(result=addresses)
     except Exception as e:
-        result = e.errors
+        result = e
 
-    return json.dumps({'result': result})
+    return json.dumps(result.toDict())

@@ -24,7 +24,8 @@ class Workplace(object):
         workPlace = models.WorkPlace.query.get(workPlaceId)
 
         if not workPlace:
-            raise custom_status.ResourceNotFound('WorkPlace', resourceId=workPlaceId)
+            raise custom_status.ResourceNotFound(msg='No workPlace found with Id - %s'
+                                                 % workPlaceId)
 
         return cls._to_Dict([workPlace], deref)[0]
 
@@ -55,8 +56,9 @@ class Workplace(object):
         workPlaces = models.WorkPlace.query.filter_by(**query_params).all()
 
         if not workPlaces:
-            raise custom_status.ResourceNotFound('WorkPlace',
-                                                 query_params=query_params)
+            raise custom_status.ResourceNotFound(msg='No workPlaces found with '
+                                                 'given query parameters',
+                                                 details=query_params)
 
         return cls._to_Dict(workPlaces, deref)
 
