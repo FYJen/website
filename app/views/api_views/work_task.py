@@ -5,11 +5,11 @@ from app import ajen_webSite
 from lib import status as custom_status
 from resources.work_task import Worktask
 
-@ajen_webSite.route('/api/worktask/<int:worktask_id>/', methods=['GET'])
-def worktask_get(worktask_id):
+@ajen_webSite.route('/api/worktask/<int:worktaskId>/', methods=['GET'])
+def worktask_get(worktaskId):
     deref = request.args.getlist('deref')
     try:
-        workTask = Worktask.get(worktask_id, deref=deref)
+        workTask = Worktask.get(worktaskId, deref=deref)
         result = custom_status.HTTPOk(result=workTask)
     except Exception as e:
         result = e

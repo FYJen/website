@@ -5,11 +5,11 @@ from app import ajen_webSite
 from lib import status as custom_status
 from resources.work_place import Workplace
 
-@ajen_webSite.route('/api/workplace/<int:workplace_id>/', methods=['GET'])
-def workplace_get(workplace_id):
+@ajen_webSite.route('/api/workplace/<int:workplaceId>/', methods=['GET'])
+def workplace_get(workplaceId):
     deref = request.args.getlist('deref')
     try:
-        workPlace = Workplace.get(workplace_id, deref=deref)
+        workPlace = Workplace.get(workplaceId, deref=deref)
         result = custom_status.HTTPOk(result=workPlace)
     except Exception as e:
         result = e

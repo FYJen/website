@@ -114,9 +114,8 @@ class Workplace(object):
                 workPlaceDict['user'] = workPlace.employee.email
 
             if 'tasks' in deref:
-                workPlaceDict['tasks'] = \
-                    dict((k, v.description) for k, v in
-                         enumerate(workPlace.work_tasks, start=1))
+                workPlaceDict['tasks'] = [workTask.description for workTask in
+                                          workPlace.work_tasks]
 
             if 'address' in deref:
                 workPlaceDict['address'] = \

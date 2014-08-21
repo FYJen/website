@@ -5,13 +5,13 @@ from app import ajen_webSite
 from lib import status as custom_status
 from resources.address import Address
 
-@ajen_webSite.route('/api/address/<int:address_id>/', methods=['GET'])
-def address_get(address_id):
+@ajen_webSite.route('/api/address/<int:addressId>/', methods=['GET'])
+def address_get(addressId):
     deref = request.args.getlist('deref')
     stringlized = True if request.args.get('stringlize', '').lower() == 'true' \
                  else False
     try:
-        address = Address.get(address_id, stringlized=stringlized, deref=deref)
+        address = Address.get(addressId, stringlized=stringlized, deref=deref)
         result = custom_status.HTTPOk(result=address)
     except Exception as e:
         result = e
