@@ -97,7 +97,10 @@ class Workplace(object):
             A list of serialized WorkPlace JSON objects.
         """
         def formatDate(dateTime):
-            return str(dateTime.month) + '/' + str(dateTime.year)
+            try:
+                return str(dateTime.month) + '/' + str(dateTime.year)
+            except Exception:
+                return None
 
         workPlaceDicts = []
         for workPlace in workPlaceObjects:

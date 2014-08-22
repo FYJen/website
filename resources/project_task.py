@@ -33,7 +33,7 @@ class ProjectTask(object):
         """Find ProjectTasks that meet the expected query parameters.
 
         Args:
-            projectName - The name of the company.
+            projectName - The name of the project.
 
         Returns:
             A list of matched and serialized ProjectTask objects.
