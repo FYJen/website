@@ -13,8 +13,10 @@ def address_get(addressId):
     try:
         address = Address.get(addressId, stringnify=stringnify, deref=deref)
         result = custom_status.HTTPOk(result=address)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())
 
@@ -33,7 +35,9 @@ def address_find():
     try:
         addresses = Address.find(**query_params)
         result = custom_status.HTTPOk(result=addresses)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())

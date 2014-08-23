@@ -11,8 +11,10 @@ def workplace_get(workplaceId):
     try:
         workPlace = Workplace.get(workplaceId, deref=deref)
         result = custom_status.HTTPOk(result=workPlace)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())
 
@@ -27,7 +29,9 @@ def workplace_find():
     try:
         workPlaces = Workplace.find(**query_params)
         result = custom_status.HTTPOk(result=workPlaces)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())

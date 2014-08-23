@@ -11,8 +11,10 @@ def worktask_get(worktaskId):
     try:
         workTask = Worktask.get(worktaskId, deref=deref)
         result = custom_status.HTTPOk(result=workTask)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())
 
@@ -26,7 +28,9 @@ def worktask_find():
     try:
         workTasks = Worktask.find(**query_params)
         result = custom_status.HTTPOk(result=workTasks)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())

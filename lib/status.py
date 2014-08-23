@@ -30,3 +30,7 @@ class ResourceNotFound(CustomStatus):
 class InvalidRequest(CustomStatus):
     def __init__(self, msg='Inavlid request', **kwargs):
         CustomStatus.__init__(self, msg=msg, **kwargs)
+
+class InternalServerError(CustomStatus):
+    def __init__(self, msg='Internal server error', **kwargs):
+        CustomStatus.__init__(self, msg=msg, **kwargs)

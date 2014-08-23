@@ -11,8 +11,10 @@ def user_get(userId):
     try:
         user = User.get(userId, deref=deref)
         result = custom_status.HTTPOk(result=user)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())
 
@@ -28,7 +30,9 @@ def user_find():
     try:
         users = User.find(**query_params)
         result = custom_status.HTTPOk(result=users)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())

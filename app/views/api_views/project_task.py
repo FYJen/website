@@ -11,8 +11,10 @@ def projectTask_get(projectTaskId):
     try:
         projectTask = ProjectTask.get(projectTaskId, deref=deref)
         result = custom_status.HTTPOk(result=projectTask)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())
 
@@ -25,7 +27,9 @@ def projectTask_find():
     try:
         ProjectTasks = ProjectTask.find(**query_params)
         result = custom_status.HTTPOk(result=ProjectTasks)
-    except Exception as e:
+    except custom_status.CustomStatus as e:
         result = e
+    except Exception:
+        result = custom_status.InternalServerError()
 
     return json.dumps(result.toDict())
