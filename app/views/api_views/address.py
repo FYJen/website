@@ -8,10 +8,10 @@ from resources.address import Address
 @ajen_webSite.route('/api/address/<int:addressId>/', methods=['GET'])
 def address_get(addressId):
     deref = request.args.getlist('deref')
-    stringlized = True if request.args.get('stringlize', '').lower() == 'true' \
+    stringnify = True if request.args.get('stringnify', '').lower() == 'true' \
                  else False
     try:
-        address = Address.get(addressId, stringlized=stringlized, deref=deref)
+        address = Address.get(addressId, stringnify=stringnify, deref=deref)
         result = custom_status.HTTPOk(result=address)
     except Exception as e:
         result = e
@@ -25,7 +25,7 @@ def address_find():
         'country': request.args.get('country', None),
         'postalCode': request.args.get('postalCode', None),
         'zipCode': request.args.get('zipCode', None),
-        'stringlized': True if request.args.get('stringlize', '').lower() == \
+        'stringnify': True if request.args.get('stringnify', '').lower() == \
                       'true' else False,
         'deref': request.args.getlist('deref')
     }

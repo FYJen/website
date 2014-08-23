@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from dbmodels import models
-from lib import status as custom_status
+from lib import status as custom_status, validation
 
 DEREF_LIST = ['tasks', 'user']
 
@@ -19,7 +19,7 @@ class Project(object):
         Returns:
             A serialized project JSON dict.
         """
-        cls.__validateDeref(deref)
+        deref = validation.validateDeref(DEREF_LIST, deref)
         project = models.Project.query.get(projectId)
 
         if not project:
@@ -38,7 +38,7 @@ class Project(object):
         Returns:
             A list of matched and serialized project objects.
         """
-        cls.__validateDeref(deref)
+        deref = validation.validateDeref(DEREF_LIST, deref)
         query_params = {
             'name': projectName
         }
@@ -60,7 +60,7 @@ class Project(object):
     def update(cls, projectId, **kwargs):
         """Update specified project with given arguments.
         """
-        raise NotImplementedError('project Resource - update method is currently '
+        raise NotImplementedError('Project Resource - update method is currently '
                                   'not supported.')
 
     @classmethod
@@ -68,16 +68,8 @@ class Project(object):
                endDate=None, addressId=None, userId=1):
         """Create a new project entry.
         """
-        raise NotImplementedError('project Resource - create method is currently '
+        raise NotImplementedError('Project Resource - create method is currently '
                                   'not supported.')
-
-    @classmethod
-    def __validateDeref(cls, derefList):
-        """Validate the deref list in the query string.
-        """
-        for deref in derefList:
-            if deref not in DEREF_LIST:
-                derefList.remove(deref)
 
     @classmethod
     def _to_Dict(cls, projectObjects, deref):

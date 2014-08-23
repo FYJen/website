@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from dbmodels import models
-from lib import status as custom_status
+from lib import status as custom_status, validation
 
 DEREF_LIST = ['occupants']
 
@@ -9,29 +9,29 @@ class Address(object):
     """Address resources.
     """
     @classmethod
-    def get(cls, addressId, stringlized=False, deref=[]):
+    def get(cls, addressId, stringnify=False, deref=[]):
         """Get Address by addressId.
 
         Args:
             addressId - A specified Address Id.
-            stringlized - Whether to flatten addresses.
+            stringnify - Whether to flatten addresses.
             deref - A list of fields to deref.
 
         Returns:
             A serialized Address JSON dict.
         """
-        cls.__validateDeref(deref)
+        deref = validation.validateDeref(DEREF_LIST, deref)
         address = models.Address.query.get(addressId)
 
         if not address:
             raise custom_status.ResourceNotFound(msg='No Address found with Id - %s' \
                                                  % addressId)
 
-        return cls._to_Dict([address], stringlized, deref)[0]
+        return cls._to_Dict([address], stringnify, deref)[0]
 
     @classmethod
     def find(cls, active=None, country=None, postalCode=None, zipCode=None,
-             stringlized=False, deref=[]):
+             stringnify=False, deref=[]):
         """Find Addresses that meet the expected query parameters.
 
         Args:
@@ -39,13 +39,13 @@ class Address(object):
             country - The country of the Address.
             postalCode - The postal code of the Address if in Canada.
             zip - The zip code of the Address if in USA.
-            stringlized - Whether to flatten addresses.
+            stringnify - Whether to flatten addresses.
             deref - A list of fields to deref.
 
         Returns:
             A list of matched and serialized Address objects.
         """
-        cls.__validateDeref(deref)
+        deref = validation.validateDeref(DEREF_LIST, deref)
         if postalCode and zipCode:
             raise custom_status.InvalidRequest(msg='Cannot specify postalCode and '
                                               'zipCode together')
@@ -66,7 +66,7 @@ class Address(object):
                                                 'given query parameters',
                                                 details=query_params)
 
-        return cls._to_Dict(addresses, stringlized, deref)
+        return cls._to_Dict(addresses, stringnify, deref)
 
     @classmethod
     def update(cls, addressId, **kwargs):
@@ -85,26 +85,18 @@ class Address(object):
                                   'not supported.')
 
     @classmethod
-    def __validateDeref(cls, derefList):
-        """Validate the deref list in the query string.
-        """
-        for deref in derefList:
-            if deref not in DEREF_LIST:
-                derefList.remove(deref)
-
-    @classmethod
-    def _to_Dict(cls, addressObjects, stringlized, deref):
+    def _to_Dict(cls, addressObjects, stringnify, deref):
         """Serialized a list of Address objects.
 
         Args:
             addressObjects - A list of Address ORM objects.
-            stringlized - Whether to flatten addresses.
+            stringnify - Whether to flatten addresses.
             deref - A list of fields to deref.
 
         Returns:
             A list of serialized WorkPlace JSON objects.
         """
-        def stringlizedAddress(addressObj):
+        def stringnifyAddress(addressObj):
             addressStr = []
 
             for field in ['Apt/Suite/Floor', 'streetName', 'city', 'province/state',
@@ -142,8 +134,8 @@ class Address(object):
             # object.
             addressDict['occupants'] = list(addressDict['occupants'])
 
-            if stringlized:
-                addressDict['stringlizedAddr'] = stringlizedAddress(addressDict)
+            if stringnify:
+                addressDict['stringnifyAddr'] = stringnifyAddress(addressDict)
 
             addressDicts.append(addressDict)
 

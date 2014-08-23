@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from dbmodels import models
-from lib import status as custom_status
+from lib import status as custom_status, validation
 from resources.address import Address
 
 DEREF_LIST = ['user', 'tasks', 'address']
@@ -20,7 +20,7 @@ class Workplace(object):
         Returns:
             A serialized WorkPlace JSON dict.
         """
-        cls.__validateDeref(deref)
+        deref = validation.validateDeref(DEREF_LIST, deref)
         workPlace = models.WorkPlace.query.get(workPlaceId)
 
         if not workPlace:
@@ -42,7 +42,7 @@ class Workplace(object):
         Returns:
             A list of matched and serialized WorkPlace objects.
         """
-        cls.__validateDeref(deref)
+        deref = validation.validateDeref(DEREF_LIST, deref)
         query_params = {
             'name': name,
             'initial': initial,
@@ -76,14 +76,6 @@ class Workplace(object):
         """
         raise NotImplementedError('WorkPlace Resource - create method is currently '
                                   'not supported.')
-
-    @classmethod
-    def __validateDeref(cls, derefList):
-        """Validate the deref list in the query string.
-        """
-        for deref in derefList:
-            if deref not in DEREF_LIST:
-                derefList.remove(deref)
 
     @classmethod
     def _to_Dict(cls, workPlaceObjects, deref):

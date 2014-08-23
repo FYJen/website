@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from dbmodels import models
-from lib import status as custom_status
+from lib import status as custom_status, validation
 
 DEREF_LIST = ['workplace']
 
@@ -19,7 +19,7 @@ class Worktask(object):
         Returns:
             A serialized WorkTask JSON dict.
         """
-        cls.__validateDeref(deref)
+        deref = validation.validateDeref(DEREF_LIST, deref)
         workTask = models.WorkTask.query.get(workTaskId)
 
         if not workTask:
@@ -38,7 +38,7 @@ class Worktask(object):
         Returns:
             A list of matched and serialized WorkTask objects.
         """
-        cls.__validateDeref(deref)
+        deref = validation.validateDeref(DEREF_LIST, deref)
         query_params = {
             'name': workPlaceName,
             'initial': initial
@@ -74,14 +74,6 @@ class Worktask(object):
         """
         raise NotImplementedError('WorkTask Resource - create method is currently '
                                   'not supported.')
-
-    @classmethod
-    def __validateDeref(cls, derefList):
-        """Validate the deref list in the query string.
-        """
-        for deref in list(derefList):
-            if deref not in DEREF_LIST:
-                derefList.remove(deref)
 
     @classmethod
     def _to_Dict(cls, workTaskObjects, deref):
