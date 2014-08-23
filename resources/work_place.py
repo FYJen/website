@@ -70,8 +70,7 @@ class Workplace(object):
                                   'not supported.')
 
     @classmethod
-    def create(cls, name=None, initial=None, positionTitle=None, startDate=None,
-               endDate=None, addressId=None, userId=1):
+    def create(cls, name, positionTitle, **kwargs):
         """Create a new WorkPlace entry.
         """
         raise NotImplementedError('WorkPlace Resource - create method is currently '

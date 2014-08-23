@@ -46,9 +46,9 @@ class WorkPlace(db.Model):
     """
     __tablename__ = 'work_place'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32))
+    name = db.Column(db.String(32), nullable=False)
     initial = db.Column(db.String(32))
-    position_title = db.Column(db.String(32))
+    position_title = db.Column(db.String(32), nullable=False)
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
@@ -67,7 +67,7 @@ class WorkTask(db.Model):
     """
     __tablename__ = 'work_task'
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.Text)
+    description = db.Column(db.Text, nullable=False)
     workplace_id = db.Column(db.Integer, db.ForeignKey('work_place.id'))
 
     def __repr__(self):
@@ -118,7 +118,7 @@ class Skill(db.Model):
     Skills are many-to-one with Tags.
     """
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.Text)
+    description = db.Column(db.Text, nullable=False)
     selected = db.Column(db.Boolean, default=True)
     tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -172,7 +172,7 @@ class Project(db.Model):
     Projects are one-to-many with ProjectTask
     """
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32))
+    name = db.Column(db.String(32), nullable=False)
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     thumbnail = db.Column(db.String(64))
@@ -192,7 +192,7 @@ class ProjectTask(db.Model):
     """
     __tablename__ = 'project_task'
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.Text)
+    description = db.Column(db.Text, nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
 
     def __repr__(self):

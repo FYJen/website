@@ -68,7 +68,7 @@ class ProjectTask(object):
                                   'not supported.')
 
     @classmethod
-    def create(cls, description=None, project_id=None):
+    def create(cls, description, projectId=None):
         """Create a new ProjectTask entry.
         """
         raise NotImplementedError('ProjectTask Resource - create method is currently '

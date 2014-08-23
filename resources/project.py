@@ -64,8 +64,7 @@ class Project(object):
                                   'not supported.')
 
     @classmethod
-    def create(cls, name=None, initial=None, positionTitle=None, startDate=None,
-               endDate=None, addressId=None, userId=1):
+    def create(cls, name, **kwargs):
         """Create a new project entry.
         """
         raise NotImplementedError('Project Resource - create method is currently '

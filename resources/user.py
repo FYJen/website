@@ -41,6 +41,9 @@ class User(object):
             lastName - The lastName of the user.
             phone - The phone of the users.
             deref - A list of fields to deref.
+
+        Returns:
+            A list of serialized user JSON dicts.
         """
         deref = validation.validateDeref(DEREF_LIST, deref)
         query_params = {
@@ -64,15 +67,14 @@ class User(object):
         return cls._to_Dict(users, deref)
 
     @classmethod
-    def update(cls, projectId, **kwargs):
+    def update(cls, userId, **kwargs):
         """Update specified user with given arguments.
         """
         raise NotImplementedError('User Resource - update method is currently '
                                   'not supported.')
 
     @classmethod
-    def create(cls, name=None, initial=None, positionTitle=None, startDate=None,
-               endDate=None, addressId=None, userId=1):
+    def create(cls, first_name, last_name, **kwargs):
         """Create a new project entry.
         """
         raise NotImplementedError('User Resource - create method is currently '

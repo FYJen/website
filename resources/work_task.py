@@ -69,7 +69,7 @@ class Worktask(object):
                                   'not supported.')
 
     @classmethod
-    def create(cls, description=None, workplace_id=None):
+    def create(cls, description, workplaceId=None):
         """Create a new WorkTask entry.
         """
         raise NotImplementedError('WorkTask Resource - create method is currently '
