@@ -92,7 +92,7 @@ class Address(db.Model):
     postalcode_zip = db.Column(db.String(32))
     active = db.Column(db.Boolean, default=True)
 
-    users = db.relationship('User', backref='address')
+    users = db.relationship('User', backref='address', lazy='dynamic')
     school = db.relationship('School', backref='address', uselist=False)
     workPlace = db.relationship('WorkPlace', backref='address',
                                  uselist=False)
