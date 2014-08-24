@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 from dbmodels import models
 from lib import status as custom_status, validation
+from resources.tag import Tag
 
 DEREF_LIST = ['tag', 'user']
 
@@ -44,8 +45,13 @@ class Skill(object):
         query_params = {
             'user_id': userId,
             'description': description
-            # TODO(AJ): Skipping tag for now untill tap api has been implemented.
         }
+
+        if tag:
+            tags = Tag.find(name=tag)
+            tagId = tags[0]['id'] if tags else None
+            query_params['tag_id'] = tagId
+
 
         for field in query_params.keys():
             if not query_params[field]:
