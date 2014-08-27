@@ -5,6 +5,7 @@ from lib import status as custom_status, validation
 from resources.work_place import Workplace
 from resources.project import Project
 from resources.address import Address
+from resources.skill import Skill
 
 DEREF_LIST = ['workPlaces', 'skills', 'projects', 'schools', 'address']
 
@@ -108,6 +109,19 @@ class User(object):
                     userDict['address'] = Address._to_Dict([addresses], True,
                                                            deref=[])
 
+            if 'skills' in deref:
+                skills = user.skills.all()
+                if skills and isinstance(skills, list):
+                    skillList = Skill._to_Dict(skills, deref=['tag'])
+                    
+                    skillDicts = {}
+                    for skill in skillList:
+                        itemList = skillDicts.get(skill['tag'], [])
+                        itemList.append(skill['description'])
+                        skillDicts.update({skill['tag']: itemList})
+
+                    userDict['summaryOfQualifications'] = skillDicts
+
             if 'workPlaces' in deref:
                 workPlaces = user.workPlaces.all()
                 if workPlaces and isinstance(workPlaces, list):
@@ -119,9 +133,6 @@ class User(object):
                 if projects and isinstance(projects, list):
                     userDict['projects'] = Project._to_Dict(projects,
                                                             deref=['tasks'])
-
-            if 'skills' in deref:
-                pass
 
             if 'schools' in deref:
                 pass
