@@ -220,7 +220,7 @@ SKILLS_LIST = {
     'CLOUD': {
         'userId': USER_LIST['main_user']['id'],
         'tagId': TAGS_LIST['Cloud'],
-        'items': ['AWS (EC2, S3, Route 53, EMP)', 'GCE', 'RackSpace', 'CloudStack',
+        'items': ['AWS (EC2, S3, Route 53, EMR)', 'GCE', 'RackSpace', 'CloudStack',
                   'OpenStack']
     },
     'SERVER': {
