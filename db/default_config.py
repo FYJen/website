@@ -120,8 +120,8 @@ WORKPLACE_LIST = {
 WORKTASK_LIST = {
     'inkling_intern_1': [
         'Implemented features for backend services of Inkling Habitat with Python and Ruby',
-        'Refactored existing code to incorporate new workflows',
-        'Temporary place holder !!'
+        'Refactored and redesigned new workflows for publishing books to Inkling',
+        'Participated in fixing bugs and optimizing HTTP slow requests in parts of the code base'
     ],
     'inkling_intern_2': [
         'Developed and fixed internal workflows and tools with Python and JavaScript',
