@@ -41,37 +41,24 @@ class Populate(object):
     def tag(cls):
         """Generate a list of tags and insert them into database.
         """
-        for tag in TAGS_LIST:
-            tag = models.Tag(name=tag)
-            db.session.add(tag)
+        for name, tagId in TAGS_LIST.iteritems():
+            entry = models.Tag(name=name, id=tagId)
+            db.session.add(entry)
 
     @classmethod
     def skill(cls):
         """Generate skills and attach them with specific user and tag, then insert
         them into database.
         """
-        tag_id_mapping = dict((v, k) for k, v in enumerate(TAGS_LIST, start=1))
-        tag_skills_mapping = {
-            'Python': [PYTHON_LIST],
-            'Ruby on Rails': [RUBY_LIST],
-            'C++/C': [C_LIST, CPP_LIST],
-            'Others': [OTHER_LIST],
-            'Database': [DATABASE_LIST],
-            'Server': [SERVER_LIST],
-            'Cloud': [CLOUD_LIST],
-            'Tools': [TOOLS_LIST]
-        }
-
-        for tag, skills in tag_skills_mapping.iteritems():
-            for i in skills:
-                for item in i:
-                    item_kargs = {
-                        'description': item,
-                        'tag_id': tag_id_mapping[tag],
-                        'user_id': 1
-                    }
-                    item = models.Skill(**item_kargs)
-                    db.session.add(item)
+        for category in SKILLS_LIST.values():
+            skill = {
+                'tag_id': category['tagId'],
+                'user_id': category['userId']
+            }
+            for item in category['items']:
+                skill.update({'description': item})
+                entry = models.Skill(**skill)
+                db.session.add(entry)
 
     @classmethod
     def school(cls):

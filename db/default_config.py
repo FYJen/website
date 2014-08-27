@@ -199,19 +199,63 @@ SCHOOL_LIST = {
     }
 }
 
-TAGS_LIST = ['C++/C', 'Cloud', 'Database', 'Others', 'Python',
-             'Ruby on Rails', 'Server', 'Tools']
-TOOLS_LIST = ['Git', 'Sublime Text 2', 'Vim', 'Linux (Ubuntu)', 'Windows',
-              'Macintosh']
-CLOUD_LIST = ['AWS (EC2, S3, Route 53, EMP)', 'GCE', 'RackSpace', 'CloudStack',
-              'OpenStack']
-SERVER_LIST = ['Apache', 'Nginx', 'DNS', 'HAproxy', 'Jenkins CI Server',
-               'Azkaban Server']
-DATABASE_LIST = ['Redis', 'SQLite', 'MySQL', 'PostgreSQL']
-OTHER_LIST = ['Bash', 'Docker', 'HTML', 'CSS', 'Bootstrap', 'JavaScript', 'Perl']
-C_LIST = ['A program with concurrency and synchronization using Administrator model']
-CPP_LIST = ['An OS with file system, memory management, threads and scheduling']
-PYTHON_LIST = ['Feature implementations, APIs, performance optimizations and bug fixes',
-               'A personal website powered by Flask and hosted on AWS']
-RUBY_LIST = ['Feature implementations, APIs, performance optimizations and bug fixes']
+TAGS_LIST = {
+    'C++/C': 1,
+    'Cloud': 2,
+    'Database': 3,
+    'Others': 4,
+    'Python': 5,
+    'Ruby': 6,
+    'Server': 7,
+    'Tools': 8
+}
 
+SKILLS_LIST = {
+    'TOOLS': {
+        'userId': USER_LIST['main_user']['id'],
+        'tagId': TAGS_LIST['Tools'],
+        'items': ['Git', 'Sublime Text 2', 'Vim', 'Linux (Ubuntu)', 'Windows',
+                  'Macintosh']
+    },
+    'CLOUD': {
+        'userId': USER_LIST['main_user']['id'],
+        'tagId': TAGS_LIST['Cloud'],
+        'items': ['AWS (EC2, S3, Route 53, EMP)', 'GCE', 'RackSpace', 'CloudStack',
+                  'OpenStack']
+    },
+    'SERVER': {
+        'userId': USER_LIST['main_user']['id'],
+        'tagId': TAGS_LIST['Server'],
+        'items': ['Apache', 'Nginx', 'DNS', 'HAproxy', 'Jenkins CI Server',
+                  'Azkaban Server']
+    },
+    'DATABASE': {
+        'userId': USER_LIST['main_user']['id'],
+        'tagId': TAGS_LIST['Database'],
+        'items': ['Redis', 'SQLite', 'MySQL', 'PostgreSQL']
+    },
+    'OTHERS': {
+        'userId': USER_LIST['main_user']['id'],
+        'tagId': TAGS_LIST['Others'],
+        'items': ['Bash', 'Docker', 'HTML', 'CSS', 'Bootstrap', 'JavaScript', 'Perl']
+    },
+    'C++/C': {
+        'userId': USER_LIST['main_user']['id'],
+        'tagId': TAGS_LIST['C++/C'],
+        'items': ['A program with concurrency and synchronization using '
+                  'Administrator model', 'An OS with file system, memory '
+                  'management, threads and scheduling']
+    },
+    'PYTHON': {
+        'userId': USER_LIST['main_user']['id'],
+        'tagId': TAGS_LIST['Python'],
+        'items': ['Feature implementations, APIs, performance optimizations and '
+                  'bug fixes', 'A personal website powered by Flask and hosted on '
+                  'AWS']
+    },
+    'RUBY': {
+        'userId': USER_LIST['main_user']['id'],
+        'tagId': TAGS_LIST['Ruby'],
+        'items': ['Feature implementations, APIs, performance optimizations and bug fixes']
+    }
+}
