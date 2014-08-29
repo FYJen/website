@@ -6,3 +6,4 @@ from app.views.api_views import address
 from app.views.api_views import user
 from app.views.api_views import skill
 from app.views.api_views import tag
+from app.views.api_views import school
