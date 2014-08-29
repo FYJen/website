@@ -87,12 +87,19 @@ class Populate(object):
                 entry = models.ProjectTask(**entry)
                 db.session.add(entry)
 
+    @classmethod
+    def usersSchools(cls):
+        entry = models.users_schools.insert() \
+                    .values([SCHOOL_LIST['school_1']['id'],
+                             USER_LIST['main_user']['id']])
+        db.session.execute(entry)
+
 class RebuildDB(object):
     """RebuildDB class which contains methods to rebuild database with predefied
     data.
     """
     TABLES = ['User', 'WorkPlace', 'WorkTask', 'Address', 'Tag', 'Skill', 'School',
-              'Course', 'Project', 'ProjectTask']
+              'Course', 'Project', 'ProjectTask', 'users_schools']
 
     @classmethod
     def _purgeTables(cls):
@@ -100,8 +107,12 @@ class RebuildDB(object):
         """
         for table in cls.TABLES:
             table = getattr(models, table)
-            print 'Deleting %s table ...' % table.__name__
-            table.query.delete()
+            try:
+                print 'Deleting %s table ...' % table.__name__
+                table.query.delete()
+            except Exception:
+                print 'Deleting %s table ...' % table.name
+                table.delete()
 
         db.session.commit()
 
