@@ -6,6 +6,7 @@ from resources.work_place import Workplace
 from resources.project import Project
 from resources.address import Address
 from resources.skill import Skill
+from resources.school import School
 
 DEREF_LIST = ['workPlaces', 'skills', 'projects', 'schools', 'address']
 
@@ -135,7 +136,10 @@ class User(object):
                                                             deref=['tasks'])
 
             if 'schools' in deref:
-                pass
+                schools = user.schools
+                if schools and isinstance(schools, list):
+                    userDict['schools'] = School._to_Dict(schools,
+                                                          deref=['address'])
 
             userDicts.append(userDict)
 
