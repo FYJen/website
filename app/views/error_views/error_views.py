@@ -8,4 +8,4 @@ def page_not_found(error):
 
 @ajen_webSite.errorhandler(500)
 def internal_server_error(error):
-    return render_template('/error/500.html', headers=setting.BASE_PAGE), 404
+    return render_template('/error/500.html', headers=setting.BASE_PAGE), 500
