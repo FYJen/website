@@ -121,6 +121,12 @@ class User(object):
                         itemList.append(skill['description'])
                         skillDicts.update({skill['tag']: itemList})
 
+                    # Merge Python/Ruby categories
+                    skillDicts['Python/Ruby'] = list(skillDicts['Python'])
+                    for skill in skillDicts['Ruby']:
+                        if skill not in skillDicts['Python/Ruby']:
+                            skillDicts['Python/Ruby'].append(skill)
+
                     userDict['summaryOfQualifications'] = skillDicts
 
             if 'workPlaces' in deref:
