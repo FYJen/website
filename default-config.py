@@ -1,11 +1,21 @@
 from db import db_config
 
-class DevConfig(object):
-    DEBUG = True
+class BasicConfig(object):
     SQLALCHEMY_DATABASE_URI = db_config.SQLALCHEMY_DATABASE_URI
     SQLALCHEMY_MIGRATE_REPO = db_config.SQLALCHEMY_MIGRATE_REPO
 
-class ProductionConfig(object):
+class WebDevConfig(BasicConfig):
+    DEBUG = True
+    SERVER_NAME = 'localhost:8080'
+
+class WebProductionConfig(BasicConfig):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = db_config.SQLALCHEMY_DATABASE_URI
-    SQLALCHEMY_MIGRATE_REPO = db_config.SQLALCHEMY_MIGRATE_REPO
+    SERVER_NAME = ''
+
+class APIDevConfig(BasicConfig):
+    DEBUG = True
+    SERVER_NAME = 'localhost:5050'
+
+class APIProductionConfig(BasicConfig):
+    DEBUG = False
+    SERVER_NAME = ''
