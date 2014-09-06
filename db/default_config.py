@@ -171,15 +171,15 @@ PROJECT_LIST = {
 
 PROJECTTASK_LIST = {
     'personal_webiste': [
-        'A personal website containing information about myself. Many proofs of concept are done in this playground',
-        'Hosted on AWS and built with Python, Flask framework, SQLAlchemy, Jinja2 Template, Docker, Redis, SQLite, Bootstrap, HTML, CSS and Nginx'
+        'A personal website about myself',
+        'Hosted on AWS and built with Python, Flask framework, SQLAlchemy, Jinja2 Template, Docker, Redis, SQLite, Bootstrap and Nginx'
     ],
     'youtube_playlist_curl': [
         'An application that will curl a YouTube playlist and download individual songs by posting requests to youtube-mp3.org',
         'Built with Python and Google YouTube Data API (V3)'
     ],
     'eat_all_candy': [
-        'An easy game built during the free time. The game is about collecting candies dropping from the sky and dodging obstacles',
+        'An interactive game to collect candies and dodge obstacles dropping from the sky by using arrow keyboards',
         'Built with Python and Pygame engine'
     ]
 }
