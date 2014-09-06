@@ -1,11 +1,11 @@
 import json
 from flask import request
 
-from app import ajen_webSite
+from app import ajen_api
 from lib import status as custom_status
 from resources.skill import Skill
 
-@ajen_webSite.route('/api/skill/<int:skillId>/', methods=['GET'])
+@ajen_api.route('/api/skill/<int:skillId>/', methods=['GET'])
 def skill_get(skillId):
     deref = request.args.getlist('deref')
     try:
@@ -18,7 +18,7 @@ def skill_get(skillId):
 
     return json.dumps(result.toDict())
 
-@ajen_webSite.route('/api/skill/', methods=['GET'])
+@ajen_api.route('/api/skill/', methods=['GET'])
 def skill_find():
     query_params = {
         'description': request.args.get('description', None),

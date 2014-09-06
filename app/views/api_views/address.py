@@ -1,11 +1,11 @@
 import json
 from flask import request
 
-from app import ajen_webSite
+from app import ajen_api
 from lib import status as custom_status
 from resources.address import Address
 
-@ajen_webSite.route('/api/address/<int:addressId>/', methods=['GET'])
+@ajen_api.route('/api/address/<int:addressId>/', methods=['GET'])
 def address_get(addressId):
     deref = request.args.getlist('deref')
     stringnify = True if request.args.get('stringnify', '').lower() == 'true' \
@@ -20,7 +20,7 @@ def address_get(addressId):
 
     return json.dumps(result.toDict())
 
-@ajen_webSite.route('/api/address/', methods=['GET'])
+@ajen_api.route('/api/address/', methods=['GET'])
 def address_find():
     query_params = {
         'active': request.args.get('active', None),

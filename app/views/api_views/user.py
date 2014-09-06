@@ -1,11 +1,11 @@
 import json
 from flask import request
 
-from app import ajen_webSite
+from app import ajen_api
 from lib import status as custom_status
 from resources.user import User
 
-@ajen_webSite.route('/api/user/<int:userId>/', methods=['GET'])
+@ajen_api.route('/api/user/<int:userId>/', methods=['GET'])
 def user_get(userId):
     deref = request.args.getlist('deref')
     try:
@@ -18,7 +18,7 @@ def user_get(userId):
 
     return json.dumps(result.toDict())
 
-@ajen_webSite.route('/api/user/', methods=['GET'])
+@ajen_api.route('/api/user/', methods=['GET'])
 def user_find():
     query_params = {
         'email': request.args.get('email', None),

@@ -1,11 +1,11 @@
 import json
 from flask import request
 
-from app import ajen_webSite
+from app import ajen_api
 from lib import status as custom_status
 from resources.tag import Tag
 
-@ajen_webSite.route('/api/tag/<int:tagId>/', methods=['GET'])
+@ajen_api.route('/api/tag/<int:tagId>/', methods=['GET'])
 def tag_get(tagId):
     deref = request.args.getlist('deref')
     try:
@@ -18,7 +18,7 @@ def tag_get(tagId):
 
     return json.dumps(result.toDict())
 
-@ajen_webSite.route('/api/tag/', methods=['GET'])
+@ajen_api.route('/api/tag/', methods=['GET'])
 def tag_find():
     query_params = {
         'name': request.args.get('name', None),

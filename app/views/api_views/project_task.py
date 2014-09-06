@@ -1,11 +1,11 @@
 import json
 from flask import request
 
-from app import ajen_webSite
+from app import ajen_api
 from lib import status as custom_status
 from resources.project_task import ProjectTask
 
-@ajen_webSite.route('/api/projecttask/<int:projectTaskId>/', methods=['GET'])
+@ajen_api.route('/api/projecttask/<int:projectTaskId>/', methods=['GET'])
 def projectTask_get(projectTaskId):
     deref = request.args.getlist('deref')
     try:
@@ -18,7 +18,7 @@ def projectTask_get(projectTaskId):
 
     return json.dumps(result.toDict())
 
-@ajen_webSite.route('/api/projecttask/', methods=['GET'])
+@ajen_api.route('/api/projecttask/', methods=['GET'])
 def projectTask_find():
     query_params = {
         'projectName': request.args.get('projectName', None),

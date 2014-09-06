@@ -1,11 +1,11 @@
 import json
 from flask import request
 
-from app import ajen_webSite
+from app import ajen_api
 from lib import status as custom_status
 from resources.work_task import Worktask
 
-@ajen_webSite.route('/api/worktask/<int:worktaskId>/', methods=['GET'])
+@ajen_api.route('/api/worktask/<int:worktaskId>/', methods=['GET'])
 def worktask_get(worktaskId):
     deref = request.args.getlist('deref')
     try:
@@ -18,7 +18,7 @@ def worktask_get(worktaskId):
 
     return json.dumps(result.toDict())
 
-@ajen_webSite.route('/api/worktask/', methods=['GET'])
+@ajen_api.route('/api/worktask/', methods=['GET'])
 def worktask_find():
     query_params = {
         'workPlaceName': request.args.get('workPlaceName', None),
