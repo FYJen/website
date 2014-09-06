@@ -1,7 +1,19 @@
 {% extends 'base.html' %}
 {% block content%}
-<div class="jumbotron">
-    <h1>Opps ...</h1>
-    <p class="lead">Coming Soon !</p>
+<div class="row marketing">
+    {% for project in projects%}
+        <div class="col-lg-6">
+           <h4>{{ project.name }}</h4>
+            <a href="#" class="thumbnail">
+                 <img src="http://placehold.it/350x150" class="img-responsive">
+            </a>
+            <ul style="padding-left: 30px;">
+                {% for task in project.tasks %}
+                    <li>{{ task }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
 </div>
+
 {% endblock %}

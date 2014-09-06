@@ -1,7 +1,116 @@
 {% extends 'base.html' %}
 {% block content%}
-<div class="jumbotron">
-    <h1>Opps ...</h1>
-    <p class="lead">Coming Soon !</p>
-</div>
+<div class='containter'>
+    <!-- Nav buttons -->
+    <div class='btn-group'>
+        <a class='btn btn-xs {% if displayType == "html" %} btn-primary {% else %} btn-default {% endif %}' href='{{resumeURL + "html"}}' role='button'><span class='glyphicon glyphicon-file'></span>HTML</a>
+        <a class='btn btn-xs {% if displayType == "json" %} btn-primary {% else %} btn-default {% endif %}' href='{{resumeURL + "json"}}' role='button'><span class='glyphicon glyphicon-th-list'></span>JSON</a>
+        <a class='btn btn-xs btn-default' href='/static/download/resume.pdf' target='_blank' role='button'><span class='glyphicon glyphicon-save'></span>Download PDF</a>
+    </div>
+    <!-- Nav buttons -->
+
+    <!-- ajen-container -->
+    <div id='ajen-container'>
+        <!-- Pick render type: either HTML or JSON -->
+        {% if displayType == 'html' %}
+            <!-- Header Table -->
+            <table class='header-table'>
+                <tr>
+                    <th colspan='3'>{{ resume.name }}</th>
+                </tr>
+                <tr>
+                    <td class='left'>
+                        <a href='{{ resume.github }}' target='_blank'>
+                            github.com/FYJen
+                        </a>
+                    </td>
+                    <td class='center'>
+                        <a href='http://www.arthur-jen.com' target='_blank'>
+                            www.arthur-jen.com
+                        </a>
+                    </td>
+                    <td class='right'>
+                        {{ resume.email }}
+                    </td>
+                </tr>
+            </table>
+            <!-- Header Table -->
+
+            <!-- Summary of Qualifications -->
+            <h2>Summary of Qualifications</h2>
+            {% set skillCate = resume.summaryOfQualifications %}
+            {% for header in ['Python/Ruby', 'C++/C', 'Others', 'Database', 'Server', 'Cloud', 'Tools'] %}
+                {% if header == 'Python/Ruby' %}
+                    <h3>Python (Flask, SQLAlchemy, GoogleData Client, Mock), Ruby on Rails (Redmine)</h3>
+                    <ul>
+                        {% for skill in skillCate[header] %}
+                            <li> {{skill}}</li>
+                        {% endfor %}
+                    </ul>
+                {% elif header == 'C++/C' %}
+                    <h3>{{header}}</h3>
+                    <ul>
+                        {% for skill in skillCate[header] %}
+                            <li> {{skill}}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <h3>{{header}}</h3>
+                    <ul>
+                        <li>{{ (', ').join(skillCate[header]) }}</li>
+                    </ul>
+                {% endif %}
+            {% endfor %}
+            <!-- Summary of Qualifications -->
+
+            <!-- Work Experinece -->
+            <h2>Work Experience</h2>
+
+            {% for work in resume.workExperiences %}
+                {% set address = work.address[0]%}
+                <h3>{{work.positionTitle}} at {{work.name}}, {{address.city}}, {{address.country}}, {{work.startDate}} - {{work.endDate}}</h3>
+
+                <ul>
+                    {% for task in work.tasks %}
+                        <li>{{task}}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+            <!-- Work Experience -->
+
+            <!-- Projects -->
+            <h2>Projects</h2>
+
+            {% for project in resume.projects %}
+                <h3>{{project.name}}</h3>
+                <ul>
+                    {% for task in project.tasks %}
+                        <li>{{task}}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+            <!-- Projects -->
+
+            <!-- Education -->
+            <h2>Education</h2>
+
+            {% set school = resume.schools[0] %}
+            <h3>Candidate for {{school.degree}}</h3>
+            <ul>
+                <li>Honours {{school.major}}, <a href='https://uwaterloo.ca/'>{{school.name}}</a>, {{school.address[0]['province/state']}}, {{school.startDate}} - Present</li>
+            </ul>
+            <!-- Education -->
+        {% endif%}
+        <!-- Pick render type: either HTML or JSON -->
+
+    </div> <!-- ajen container -->
+
+    {% if displayType == 'json' %}
+        <script>
+            renderjson.set_show_to_level(4);
+            document.getElementById('ajen-container').appendChild(renderjson({{resume|safe}}));
+        </script>
+    {% endif %}
+
+</div> <!-- bootstrap container -->
 {% endblock %}

@@ -16,11 +16,13 @@
         <!-- Custom styles for this template -->
         <link href="/static/css/jumbotron-narrow.css" rel="stylesheet">
 
-        <!-- logo css -->
-        <link href="/static/css/linkedin_logo.css" type="text/css" rel="stylesheet">
+        <!-- ajen resume CSS -->
+        <link href="/static/css/ajen-resume.css" rel="stylesheet">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+
+        <script src="/static/js/renderjson.js"></script>
 
     </head>
 
@@ -40,7 +42,7 @@
                     <li {% if request.path == projectsURL %}class="active"{% endif %}>
                         <a href="{{ projectsURL }}">{{headers.Projects}}</a>
                     </li>
-                    <li {% if request.path == resumeURL %}class="active"{% endif %}>
+                    <li {% if request.path == resumeURL or request.path == resumeURL + 'html/' or request.path == resumeURL + 'json/' %}class="active"{% endif %}>
                         <a href="{{ resumeURL }}">{{headers.Resume}}</a>
                     </li>
                     <li {% if request.path == contactURL %}class="active"{% endif %}>
@@ -64,9 +66,5 @@
 
         </div> <!-- /container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
      </body>
 </html>
