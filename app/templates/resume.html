@@ -68,7 +68,7 @@
 
             {% for work in resume.workExperiences %}
                 {% set address = work.address[0]%}
-                <h3>{{work.positionTitle}} at {{work.name}}, {{address.city}}, {{address.country}}, {{work.startDate}} - {{work.endDate}}</h3>
+                <h3 class='work'>{{work.positionTitle}} at <a href='{{work.web_link}}' target='_blank'>{{work.name}}</a>, {{address.city}}, {{address.country}}, {{work.startDate}} - {{work.endDate}}</h3>
 
                 <ul>
                     {% for task in work.tasks %}
@@ -82,7 +82,7 @@
             <h2>Projects</h2>
 
             {% for project in resume.projects %}
-                <h3>{{project.name}}</h3>
+                <h3 class='project'>{{project.name}}</h3>
                 <ul>
                     {% for task in project.tasks %}
                         <li>{{task}}</li>
