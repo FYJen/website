@@ -25,8 +25,8 @@ def resume(displayType='html'):
     except Exception:
         abort(500)
 
-    # Even requests library comes with json function, we will with the string
-    # content to it to json specifically because the order is important to us.
+    # Even requests library comes with json function, we will use the string
+    # content to convert to json specifically because the order is important to us.
     # Hooking up json.loads() with OrderedDict to achieve that functionality.
     resume = json.loads(resume.content, object_pairs_hook=OrderedDict)
 
@@ -70,4 +70,12 @@ def projects():
 
 @ajen_webSite.route('/contact/', methods=['GET'])
 def contact():
-    return render_template('contact.html', headers=setting.BASE_PAGE)
+    try:
+        user = requests.get(QUERY % (HOST, 'user', 1))
+    except Exception:
+        abort(500)
+
+    user = user.json()
+    if user['status']['statusCode'] == 'HTTPOk' and user['result']:
+        return render_template('contact.html', headers=setting.BASE_PAGE,
+                               user=user['result'])
