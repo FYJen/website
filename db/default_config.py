@@ -60,10 +60,13 @@ USER_LIST = {
         'first_name': 'Fei-Yang',
         'last_name': 'Jen',
         'email': 'fjen@uwaterloo.ca',
+        'alt_email': 'fei.yang.jen@gmail.com',
         'phone': '(226) 972-0522',
+        'skype': 'arthur5110',
         'github': 'https://github.com/FYJen',
         'linkedin': 'https://www.linkedin.com/pub/arthur-jen/56/528/914',
-        'address_id': ADDRESS_LIST['user_address']['id']
+        'address_id': ADDRESS_LIST['user_address']['id'],
+        'intro': '',
     }
 }
 
@@ -75,7 +78,8 @@ WORKPLACE_LIST = {
         'start_date': datetime(2014, 5, 1),
         'end_date': datetime(2014, 8, 31),
         'address_id': ADDRESS_LIST['inkling_address']['id'],
-        'user_id': USER_LIST['main_user']['id']
+        'user_id': USER_LIST['main_user']['id'],
+        'web_link': 'http://www.inkling.com'
     },
     'inkling_intern_2': {
         'id': 2,
@@ -84,7 +88,8 @@ WORKPLACE_LIST = {
         'start_date': datetime(2013, 9, 1),
         'end_date': datetime(2013, 12, 31),
         'address_id': ADDRESS_LIST['inkling_address']['id'],
-        'user_id': USER_LIST['main_user']['id']
+        'user_id': USER_LIST['main_user']['id'],
+        'web_link': 'http://www.inkling.com'
     },
     'OICR_intern': {
         'id': 3,
@@ -94,7 +99,8 @@ WORKPLACE_LIST = {
         'start_date': datetime(2013, 1, 1),
         'end_date': datetime(2013, 4, 30),
         'address_id': ADDRESS_LIST['OICR_address']['id'],
-        'user_id': USER_LIST['main_user']['id']
+        'user_id': USER_LIST['main_user']['id'],
+        'web_link': 'http://www.oicr.on.ca'
     },
     'Awareness_intern': {
         'id': 4,
@@ -103,7 +109,8 @@ WORKPLACE_LIST = {
         'start_date': datetime(2012, 5, 1),
         'end_date': datetime(2012, 8, 31),
         'address_id': ADDRESS_LIST['Awareness_address']['id'],
-        'user_id': USER_LIST['main_user']['id']
+        'user_id': USER_LIST['main_user']['id'],
+        'web_link': 'http://www.awarenesshub.com'
     },
     'NCHC_intern': {
         'id': 5,
@@ -113,7 +120,8 @@ WORKPLACE_LIST = {
         'start_date': datetime(2011, 9, 1),
         'end_date': datetime(2011, 12, 31),
         'address_id': ADDRESS_LIST['NCHC_address']['id'],
-        'user_id': USER_LIST['main_user']['id']
+        'user_id': USER_LIST['main_user']['id'],
+        'web_link': 'http://www.nchc.org.tw/en'
     }
 }
 
