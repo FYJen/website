@@ -99,7 +99,9 @@ class User(object):
                 ('id', user.id),
                 ('name', (' ').join([user.first_name, user.last_name])),
                 ('email', user.email),
+                ('alt_email', user.alt_email),
                 ('phone', user.phone),
+                ('skype', user.skype),
                 ('github', user.github),
                 ('linkedin', user.linkedin)
             ])

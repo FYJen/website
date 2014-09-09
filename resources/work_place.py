@@ -101,7 +101,8 @@ class Workplace(object):
                 ('initial', workPlace.initial),
                 ('positionTitle', workPlace.position_title),
                 ('startDate', formatDate(workPlace.start_date)),
-                ('endDate', formatDate(workPlace.end_date))
+                ('endDate', formatDate(workPlace.end_date)),
+                ('web_link', workPlace.web_link)
             ])
 
             if 'user' in deref:
