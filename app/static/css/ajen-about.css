@@ -1,0 +1,72 @@
+.ajen-about {
+    width: 100%;
+    text-align: left;
+    color: #000;
+    margin-bottom: 10px;
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    border-radius: 6px;
+    display: table;
+}
+
+.ajen-about img {
+    border-radius: 6px;
+    width: 246px;
+    height: 350px;
+}
+
+.ajen-name-show {
+    text-align: center;
+    color: #777;
+    font-size: 24px;
+    display: none;
+}
+
+.ajen-sm-6 .intro {
+    margin-top: 10px;
+}
+
+@media (max-width: 631px) {
+  .ajen-name-show {
+    display: block;
+  }
+  .ajen-about {
+    padding-top: 20px;
+  }
+}
+
+/* Separate intro text from pic further */
+@media (max-width: 601px) {
+    .ajen-sm-6 .intro {
+        margin-top: 30px;
+    }
+}
+
+/* Override bootstrap's .thumbnail class */
+.ajen-thumbnail {
+    padding: 10px;
+    background: #4276b6 url(/static/img/header.jpg) 0 0 repeat-x;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all .2s ease-in-out;
+}
+
+/* Override bootstrap's col-sm-6 class */
+.ajen-sm-6 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Overrite responsive col-sm-6 */
+@media (min-width: 601px) {
+    .ajen-sm-6 {
+        float: left;
+        width: 50%;
+    }
+}

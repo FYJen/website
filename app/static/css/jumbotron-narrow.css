@@ -18,7 +18,6 @@ body {
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
-  padding-bottom: 19px;
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
@@ -52,9 +51,10 @@ body {
   border-bottom: 1px solid #e5e5e5;
   background: #4276b6 url(/static/img/header.jpg) 0 0 repeat-x;
 }
+
 .jumbotron .btn {
   padding: 14px 24px;
-  font-size: 21px;
+  font-size: 15px;
 }
 
 /* Supporting marketing content */
@@ -63,6 +63,11 @@ body {
 }
 .marketing p + h4 {
   margin-top: 28px;
+}
+
+/* Space out the masthead */
+.header {
+  margin-bottom: 20px;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -74,12 +79,39 @@ body {
     padding-right: 0;
     padding-left: 0;
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
+  }
+}
+
+/* AJEN CUSTOM */
+
+/* Hide away name */
+@media (max-width: 631px) {
+  .text-muted {
+    display: none;
+  }
+  .ajen-name-hide {
+    display: block;
+    padding-bottom: 54px;
+  }
+}
+
+@media (min-width: 631px) {
+  .ajen-name-hide {
+    display: none;
+  }
+  .text-muted {
+    padding-bottom: 19px;
+    display: block;
+  }
+}
+
+/* Resize nav padding */
+@media (max-width: 482px) {
+  .nav li a {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }
