@@ -13,6 +13,10 @@ div #ajen-container h3 {
     margin-bottom: 2px;
 }
 
+div #ajen-container h3.work, div #ajen-container h3.project{
+    margin-top: 12px;
+}
+
 div #ajen-container h2 {
     font-size: 100%;
     font-weight: bold;
