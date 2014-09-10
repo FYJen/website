@@ -180,6 +180,7 @@ class Project(db.Model):
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     thumbnail = db.Column(db.String(64))
+    link = db.Column(db.String(64))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     project_tasks = db.relationship('ProjectTask', backref='project',
