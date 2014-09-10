@@ -46,7 +46,10 @@
 
 /* Override bootstrap's .thumbnail class */
 .ajen-thumbnail {
-    padding: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 9px;
+    padding-bottom: 9px;
     background: #4276b6 url(/static/img/header.jpg) 0 0 repeat-x;
     margin-bottom: 20px;
     line-height: 1.42857143;
