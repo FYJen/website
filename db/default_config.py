@@ -158,21 +158,24 @@ PROJECT_LIST = {
         'id': 1,
         'name': 'Personal Website',
         'user_id': USER_LIST['main_user']['id'],
-        'thumbnail': 'Temporary place holder !!',
+        'thumbnail': '/static/img/personal_website.png',
+        'link': 'https://github.com/FYJen/website',
         'start_date': datetime(2014, 7, 15)
     },
     'youtube_playlist_curl': {
         'id': 2,
         'name': 'YouTube Playlist Curl',
         'user_id': USER_LIST['main_user']['id'],
-        'thumbnail': 'Temporary place holder !!',
+        'thumbnail': '#',
+        'link': '#',
         'start_date': datetime(2014, 5, 15)
     },
     'eat_all_candy': {
         'id': 3,
         'name': 'Eat all Candies (Cut the Rope version)',
         'user_id': USER_LIST['main_user']['id'],
-        'thumbnail': 'Temporary place holder !!',
+        'thumbnail': '#',
+        'link': '#',
         'start_date': datetime(2013, 10, 15)
     }
 }

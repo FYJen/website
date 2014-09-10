@@ -94,7 +94,8 @@ class Project(object):
                 ('name', project.name),
                 ('startDate', formatDate(project.start_date)),
                 ('endDate', formatDate(project.end_date)),
-                ('thumbnail', project.thumbnail)
+                ('thumbnail', project.thumbnail),
+                ('link', project.link)
             ])
 
             if 'user' in deref:

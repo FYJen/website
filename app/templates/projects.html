@@ -7,7 +7,7 @@
                 <h4>{{ project.name }}</h4>
             </div>
             <div class='thumbnail'>
-                <a href='#'><img src="http://placehold.it/350x150" class="img-responsive"></a>
+                <a href='{{project.link}}' target='_blank'><img src='{{project.thumbnail}}' class="img-responsive ajen-thumbnail-project"></a>
                 <div class='caption'>
                     <ul style="padding-left: 20px;">
                         {% for task in project.tasks %}
