@@ -127,29 +127,29 @@ WORKPLACE_LIST = {
 
 WORKTASK_LIST = {
     'inkling_intern_1': [
-        'Implemented features for backend services of Inkling Habitat with Python and Ruby',
-        'Refactored and redesigned new workflows for publishing books to Inkling',
-        'Participated in fixing bugs and optimizing HTTP slow requests in parts of the code base'
+        'Implemented several features in the backend services of Inkling Habitat using Python and Ruby',
+        'Refactored the workflow for publishing books to the Inkling Store',
+        'Fixed bugs and optimized slow HTTP requests in the code base'
     ],
     'inkling_intern_2': [
-        'Developed and fixed internal workflows and tools with Python and JavaScript',
-        'Participated daily production deployments and maintenance of Cloud environments',
+        'Developed and fixed internal workflows and tools to facilitate company new hire process using Python and JavaScript',
+        'Participated in daily production deployments and maintenance of Cloud environments',
         'Implemented a job scheduler with open-source Azkaban Server and AWS EMR'
     ],
     'OICR_intern': [
-        'Improved software Installation time by 50% to 80% with Bash',
-        'Built applications to deploy scalable SGE Cluster with NFS on GCE with Perl',
+        'Improved software Installation time by 80% using Bash',
+        'Built applications to deploy scalable SGE Cluster with NFS on GCE using Perl',
         'Created generic application to launch scalable environments on AWS'
     ],
     'Awareness_intern': [
         'Implemented a private Cloud with CloudStack and LDAP to provide IaaS locally',
-        'Deployed scalable Cloud environment with Alarm Cloak, SQS, S3 and Load-Balance on AWS',
-        'Performed benchmarking on database and disk I/O on Amazon and RackSpace'
+        'Deployed scalable Cloud environment with Alarm Clock, SQS, S3 and Load-Balance on AWS',
+        'o  Performed benchmarking of database and disk I/O on Amazon and RackSpace'
     ],
     'NCHC_intern': [
         'Configured DNS with geo-location feature to distribute client connections',
         'Implemented load-balancer using HAproxy, Dstat and third-party libraries',
-        'Co-Developed Cloud storage service nation-wide'
+        'Co-Developed nation-wide Cloud storage service'
     ]
 }
 
@@ -164,15 +164,15 @@ PROJECT_LIST = {
     },
     'youtube_playlist_curl': {
         'id': 2,
-        'name': 'YouTube Playlist Curl',
+        'name': 'YouTube Playlist Curler',
         'user_id': USER_LIST['main_user']['id'],
-        'thumbnail': '/static/img/projects/eatCandies.png',
+        'thumbnail': '/static/img/projects/playlistCurler.png',
         'link': 'https://github.com/FYJen/playlistCurler',
         'start_date': datetime(2014, 5, 15)
     },
     'eat_all_candy': {
         'id': 3,
-        'name': 'Eat Candies (Cut the Rope version)',
+        'name': 'Eat Candies',
         'user_id': USER_LIST['main_user']['id'],
         'thumbnail': '/static/img/projects/eatCandies.png',
         'link': 'https://github.com/FYJen/eat-candies',
@@ -182,15 +182,15 @@ PROJECT_LIST = {
 
 PROJECTTASK_LIST = {
     'personal_webiste': [
-        'A personal website about myself',
-        'Hosted on AWS and built with Python, Flask framework, SQLAlchemy, Jinja2 Template, Docker, Redis, SQLite, Bootstrap and Nginx'
+        'Implemented RESTful API to serve internal requests',
+        'Hosted on AWS and built with Python, Flask framework, SQLAlchemy, Jinja2 Template, Redis, SQLite, Bootstrap, HTML, CSS, Nginx and uWSGI'
     ],
     'youtube_playlist_curl': [
-        'An application that will curl a YouTube playlist and download individual songs by posting requests to youtube-mp3.org',
+        'An application that will curl a given YouTube playlist and download individual songs by posting requests to youtube-mp3.org',
         'Built with Python and Google YouTube Data API (V3)'
     ],
     'eat_all_candy': [
-        'An interactive game to collect candies and dodge obstacles dropping from the sky by using arrow keyboards',
+        'An interactive game to collect candies and dodge obstacles dropping from the sky',
         'Built with Python and Pygame engine'
     ]
 }
