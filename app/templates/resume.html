@@ -37,25 +37,32 @@
             <!-- Header Table -->
 
             <!-- Summary of Qualifications -->
-            <h2>Summary of Qualifications</h2>
+            <h2 class='summary'>Summary of Qualifications</h2>
             {% set skillCate = resume.summaryOfQualifications %}
             {% for header in ['Python/Ruby', 'C++/C', 'Others', 'Database', 'Server', 'Cloud', 'Tools'] %}
                 {% if header == 'Python/Ruby' %}
                     <h3>Python (Flask, SQLAlchemy, GoogleData Client, Mock), Ruby on Rails (Redmine)</h3>
+                    <!-- Temporarily disable-->
                     <ul>
                         {% for skill in skillCate[header] %}
                             <li> {{skill}}</li>
                         {% endfor %}
                     </ul>
                 {% elif header == 'C++/C' %}
-                    <h3>{{header}}</h3>
+                    <!-- Temporarily disable-->
+                    <!-- <h3>{{header}}</h3>
                     <ul>
                         {% for skill in skillCate[header] %}
                             <li> {{skill}}</li>
                         {% endfor %}
+                    </ul> -->
+                {% elif header == 'Others' %}
+                    <h3>Also experienced with:</h3>
+                    <ul>
+                        <li>{{ (', ').join(skillCate[header]) }}</li>
                     </ul>
                 {% else %}
-                    <h3>{{header}}</h3>
+                    <h3>{{header}}:</h3>
                     <ul>
                         <li>{{ (', ').join(skillCate[header]) }}</li>
                     </ul>
@@ -95,9 +102,9 @@
             <h2>Education</h2>
 
             {% set school = resume.schools[0] %}
-            <h3>Candidate for {{school.degree}}</h3>
+            <h3>Candidate for Honours {{school.degree}}</h3>
             <ul>
-                <li>Honours {{school.major}}, <a href='https://uwaterloo.ca/'>{{school.name}}</a>, {{school.address[0]['province/state']}}, {{school.startDate}} - Present</li>
+                <li><a href='https://uwaterloo.ca/'>{{school.name}}</a>, {{school.address[0]['province/state']}}, {{school.startDate}} - Present</li>
             </ul>
             <!-- Education -->
         {% endif%}
