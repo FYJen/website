@@ -15,6 +15,8 @@ ajen_webSite.config.from_object(WEB_CONFIG_FILE)
 API_DEV_CONFIG = 'default-config.APIDevConfig'
 API_CONFIG_FILE = os.environ.get('API_PRODUCTION_CONFIG', API_DEV_CONFIG)
 ajen_api.config.from_object(API_CONFIG_FILE)
+
+# DB configuration.
 db = SQLAlchemy(ajen_api)
 
 from app.views import content_views, api_views, error_views
