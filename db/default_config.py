@@ -248,7 +248,7 @@ SKILLS_LIST = {
     'OTHERS': {
         'userId': USER_LIST['main_user']['id'],
         'tagId': TAGS_LIST['Others'],
-        'items': ['Bash', 'Docker', 'HTML', 'CSS', 'Bootstrap', 'JavaScript', 'Perl']
+        'items': ['C++', 'C', 'Bash', 'Docker', 'HTML', 'CSS', 'Bootstrap', 'JavaScript', 'Perl']
     },
     'C++/C': {
         'userId': USER_LIST['main_user']['id'],
