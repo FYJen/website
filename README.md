@@ -31,7 +31,7 @@ Retrieve user information.
 
 Example:
 
-- `/api/user/1`
+- /api/user/1
 	
 	```
 	{
@@ -52,7 +52,7 @@ Example:
     	}
 	}
 	```
-- `/api/user/?email=fjen@uwaterloo.ca&deref=address&deref=projects`
+- /api/user/?email=fjen@uwaterloo.ca&deref=address&deref=projects
 
 	```
 	{
@@ -119,7 +119,7 @@ Example:
     	}]
 	}
 	```
-- `/api/user/2`
+- /api/user/2
 
 	```
 	{
