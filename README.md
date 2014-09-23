@@ -23,7 +23,6 @@ Currently I only open requests to `GET` method. All API support retrieving data 
 In addition, each API has its own `deref` fields that can be added to the query string optionaly to return information in more details. More examples will be provied below. 
 
 #### ```GET /api/user/```
-=========================
 Retrieve user information.
 
 - `index`: /api/user/<`int:id`>
@@ -122,7 +121,6 @@ Example:
 	```
 
 #### ```GET /api/workplace/```
-=========================
 Retrieve work places information.
 
 - `index`: /api/workplace/<`int:id`>
@@ -179,7 +177,6 @@ Example:
 	```
 
 #### ```GET /api/worktask/```
-============================
 Retrieve work tasks information.
 
 - `index`: /api/workplace/<`int:id`>
@@ -229,7 +226,6 @@ Example:
 	```
 
 #### ```GET /api/address/```
-===========================
 Retrieve address information.
 
 - `index`: /api/workplace/<`int:id`>
@@ -287,7 +283,6 @@ Example:
 	```
 
 #### ```GET /api/address/```
-===========================
 Retrieve address information.
 
 - `index`: /api/workplace/<`int:id`>
