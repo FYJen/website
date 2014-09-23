@@ -124,6 +124,9 @@ class Address(object):
             if 'occupants' in deref:
                 for possibleOccupant in ['users', 'school', 'workPlace']:
                     result = getattr(address, possibleOccupant)
+                    result = result.all() if \
+                             result.__class__.__name__ == 'AppenderBaseQuery' else \
+                             result
                     if isinstance(result, list):
                         for occupant in result:
                             addressDict['occupants'].add(occupant.email)
