@@ -20,7 +20,7 @@ Currently I only open requests to `GET` method. All API support retrieving data 
 - `index`: Supply resource id.
 - `find`: Supply a list of query parameters.
 
-In addition, each API has its own `deref` fields that can be added to the query string optionaly to return information in more details. To access the API, you can easily send `GET` request to [www.arthur-jen.com](http://www.arthur-jen.com).
+In addition, each API has its own `deref` fields that can be added to the query string optionaly to return information in more detailed. To access the API, you can easily send `GET` request to [www.arthur-jen.com](http://www.arthur-jen.com).
 
 More examples will be provied below. 
 
@@ -31,7 +31,7 @@ Retrieve user information.
 - `find`: /api/user/?<`string:email`; `string:firstName`; `string:lastName`; `int:phone`>
 - `deref` fields: `address`, `skills`, `workPlaces`, `projects`, and `schools` 
 
-Example:
+Examples:
 
 - /api/user/1
 	
@@ -109,7 +109,7 @@ Retrieve work places information.
 - `find`: /api/workplace/?<`string:name`; `string:initial`; `string:positionTitle`>
 - `deref` fields: `user`, `tasks`, and `address`
 
-Example:
+Examples:
 
 - /api/workplace/2
 	
@@ -165,7 +165,7 @@ Retrieve work tasks information.
 - `find`: /api/workplace/?<`string:workPlaceName`; `string:initial`>
 - `deref` fields: `workplace`
 
-Example:
+Examples:
 
 - /api/worktask/11
 	
@@ -214,7 +214,7 @@ Retrieve address information.
 - `find`: /api/workplace/?<`boolean:active`; `string:country`; `string:postalCode`; `string:zipCode`; `boolean:stringnify`>
 - `deref` fields: `occupants`
 
-Example:
+Examples:
 
 - /api/address/1
 	
@@ -271,7 +271,7 @@ Retrieve tag information.
 - `find`: /api/tag/?<`string:name`>
 - `deref` fields: `skill`
 
-Example:
+Examples:
 
 - /api/tag/5
 	
@@ -330,7 +330,7 @@ Retrieve skill information.
 - `find`: /api/skill/?<`string:description`; `string:tag`; `int:userId`>
 - `deref` fields: `user` and `tag`
 
-Example:
+Examples:
 
 - /api/skill/5
 	
@@ -395,7 +395,7 @@ Retrieve school information.
 - `find`: /api/school/?<`string:name`; `string:level`; `string:attending`>
 - `deref` fields: `address` and `course` (currently not supported)
 
-Example:
+Examples:
 
 - /api/school/1
 	
@@ -465,7 +465,7 @@ Retrieve project information.
 - `find`: /api/project/?<`string:projectName`>
 - `deref` fields: `user` and `tasks`
 
-Example:
+Examples:
 
 - /api/project/1
 	
@@ -517,7 +517,7 @@ Retrieve project task information.
 - `find`: /api/projecttask/?<`string:projectName`>
 - `deref` fields: `project`
 
-Example:
+Examples:
 
 - /api/projecttask/1
 	
@@ -555,9 +555,22 @@ Example:
 	}
 	```
 
-##Database
+
+##Database Model
+Database model can be found in [dbmodels directory](./dbmodels/models.py). The file defines a list of models(tables) used to store information for the website. API will be accessing these data through the models defined there. I choose to use SQLite to remove overhead dealing with configuring MySQL and PostgreSQL. Also, for the project like this, which is relatively less data-intensive, SQLite is a good candidate.
 
 
 ##Deployment
 
+#####Local Development
+Simply open two terminals and execute `python run-api.py` and `python run-web.py` separately. This will bring up both web and API server.
+
+####Production
+Nginx and Supersivor(uWSGI) are used to host the web server. The configurations for both Nginx and Supervisor can be found in [deploy directory](./deploy/). I used Supervisor to bring up two separate uWSGI processes: one for webpages and one for API. Nginx is the front web server which will route traffic to different endpoints depending on the URL path.
+
+##TODO
+There are a couple improvements that can be done to help out with deployment and overall user experience.
+
+- Using memory database like Redis or Memcache
+- Using Docker to deploy web server 
   
