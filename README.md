@@ -1,6 +1,6 @@
 #[Personal Website](http://www.arthur-jen.com)
 
-This is a personal website that I built to exhibit my interests, projects and latest resume. In fact, this website is a by-product of RESTful API that I built underneath it. The website is hosted on AWS. Since I work most comfortably with Python, I choose Flask as my web framework and SQLAlchemy ORM as toolkit to interact with database. Nginx and Supervisor(uWSGI) are used to host the web server and keep it alive. I am currently working on Redis and Docker integration to make data retrieval faster and deployment smoother.
+This is a personal website that I built to exhibit my interests, projects and latest resume. In fact, this website is a by-product of RESTful API that I built underneath it. The website is hosted on AWS. Since I work most comfortably with Python, I choose Flask as my web framework and SQLAlchemy ORM as toolkit to interact with database. Nginx and Supervisor(uWSGI) are used to host web and API servers and keep them alive. I am currently working on Redis and Docker integration to make data retrieval faster and deployment smoother.
 
 ##RESTful API
 The RESTful API is built around personal information on my resume. The API includes the following categories:
@@ -563,10 +563,10 @@ Database model can be found in [dbmodels directory](./dbmodels/models.py). The f
 ##Deployment
 
 #####Local Development
-Simply open two terminals and execute `python run-api.py` and `python run-web.py` separately. This will bring up both web and API server.
+Simply open two terminals and execute `python run-api.py` and `python run-web.py` separately. This will bring up both web and API server. By default, web server will run on 127.0.0.1:8080 and API server will run on 127.0.0.1:5050
 
 ####Production
-Nginx and Supersivor(uWSGI) are used to host the web server. The configurations for both Nginx and Supervisor can be found in [deploy directory](./deploy/). I used Supervisor to bring up two separate uWSGI processes: one for webpages and one for API. Nginx is the front web server which will route traffic to different endpoints depending on the URL path.
+Nginx and Supersivor(uWSGI) are used to host web and API servers. The configurations for both Nginx and Supervisor can be found in [deploy directory](./deploy/). I used Supervisor to bring up two separate uWSGI processes: one for webpages and one for API. Nginx is the front web server which will route traffic to different endpoints depending on the URL path.
 
 ##TODO
 There are a couple improvements that can be done to help out with deployment and overall user experience.
