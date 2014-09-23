@@ -17,12 +17,13 @@ The RESTful API is built around personal information on my resume. The API inclu
 
 Currently I only open requests to `GET` method. All API support retrieving data through `index` and `find`.
 
-- `index`: Supply index id.
+- `index`: Supply resource id.
 - `find`: Supply a list of query parameters.
 
 In addition, each API has its own `deref` fields that can be added to the query string optionaly to return information in more details. More examples will be provied below. 
 
-### ```GET /api/user/```
+#### ```GET /api/user/```
+=========================
 Retrieve user information.
 
 - `index`: /api/user/<`int:id`>
@@ -120,7 +121,8 @@ Example:
 	}
 	```
 
-### ```GET /api/workplace/```
+#### ```GET /api/workplace/```
+=========================
 Retrieve work places information.
 
 - `index`: /api/workplace/<`int:id`>
@@ -176,7 +178,8 @@ Example:
 	}
 	```
 
-### ```GET /api/worktask/```
+#### ```GET /api/worktask/```
+============================
 Retrieve work tasks information.
 
 - `index`: /api/workplace/<`int:id`>
@@ -225,7 +228,66 @@ Example:
 	}
 	```
 
-### ```GET /api/address/```
+#### ```GET /api/address/```
+===========================
+Retrieve address information.
+
+- `index`: /api/workplace/<`int:id`>
+- `find`: /api/workplace/?<`boolean:active`; `string:country`; `string:postalCode`; `string:zipCode`; `boolean:stringnify`>
+- `deref` fields: `occupants`
+
+Example:
+
+- /api/address/1
+	
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: {
+        	id: 1,
+        	Apt / Suite / Floor: "Suite 302",
+        	streetName: "321 Lester St.",
+        	city: "Waterloo",
+        	province / state: "ON",
+        	country: "Canada",
+        	postalCode / zip: "N2L 3W6",
+        	active: true,
+        	occupants: []
+    	}
+	}
+	```
+- /api/address/?active=1&country=USA&deref=occupants&stringnify=true
+
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 3,
+        	Apt / Suite / Floor: "4th Floor",
+        	streetName: "153 Kearny St.",
+        	city: "San Francisco",
+        	province / state: "CA",
+        	country: "USA",
+        	postalCode / zip: "94108",
+        	active: true,
+        	occupants: [
+            	"Inkling"
+        	],
+        	stringnifyAddr: "4th Floor, 153 Kearny St., San Francisco, CA, USA, 94108"
+    	}]
+	}
+	```
+
+#### ```GET /api/address/```
+===========================
 Retrieve address information.
 
 - `index`: /api/workplace/<`int:id`>
