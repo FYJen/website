@@ -10,7 +10,7 @@ class WebDevConfig(BasicConfig):
 
 class WebProductionConfig(BasicConfig):
     DEBUG = False
-    SERVER_NAME = ''
+    SERVER_NAME = 'www.arthur-jen.com'
 
 class APIDevConfig(BasicConfig):
     DEBUG = True
@@ -18,4 +18,4 @@ class APIDevConfig(BasicConfig):
 
 class APIProductionConfig(BasicConfig):
     DEBUG = False
-    SERVER_NAME = ''
+    SERVER_NAME = 'www.arthur-jen.com'
