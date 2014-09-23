@@ -1,4 +1,4 @@
-#Personal Website
+#[Personal Website](http://www.arthur-jen.com)
 
 This is a personal website that I built to exhibit my interests, projects and latest resume. In fact, this website is a by-product of RESTful API that I built underneath it. The website is hosted on AWS. Since I work most comfortably with Python, I choose Flask as my web framework and SQLAlchemy ORM as toolkit to interact with database. Nginx and Supervisor(uWSGI) are used to host the web server and keep it alive. I am currently working on Redis and Docker integration to make data retrieval faster and deployment smoother.
 
@@ -20,13 +20,15 @@ Currently I only open requests to `GET` method. All API support retrieving data 
 - `index`: Supply resource id.
 - `find`: Supply a list of query parameters.
 
-In addition, each API has its own `deref` fields that can be added to the query string optionaly to return information in more details. More examples will be provied below. 
+In addition, each API has its own `deref` fields that can be added to the query string optionaly to return information in more details. To access the API, you can easily send `GET` request to [www.arthur-jen.com](http://www.arthur-jen.com).
+
+More examples will be provied below. 
 
 #### ```GET /api/user/```
 Retrieve user information.
 
 - `index`: /api/user/<`int:id`>
-- `find`: /api/user/?<`string:email`; `string:firstName`; `string:lastName`; `string:phone`>
+- `find`: /api/user/?<`string:email`; `string:firstName`; `string:lastName`; `int:phone`>
 - `deref` fields: `address`, `skills`, `workPlaces`, `projects`, and `schools` 
 
 Example:
@@ -93,29 +95,9 @@ Example:
                 	"Implemented RESTful API to serve internal requests",
                 	"Hosted on AWS and built with Python, Flask framework, SQLAlchemy, Jinja2 Template, Redis, SQLite, Bootstrap, HTML, CSS, Nginx and uWSGI"
             	]
-        	}, {
-            	id: 2,
-            	name: "YouTube Playlist Curler",
-            	startDate: "5/2014",
-            	endDate: null,
-            	thumbnail: "/static/img/projects/playlistCurler.png",
-            	link: "https://github.com/FYJen/playlistCurler",
-            	tasks: [
-                	"An application that will curl a given YouTube playlist and download individual songs by posting requests to youtube-mp3.org",
-                	"Built with Python and Google YouTube Data API (V3)"
-            	]
-        	}, {
-            	id: 3,
-            	name: "Eat Candies",
-            	startDate: "10/2013",
-            	endDate: null,
-            	thumbnail: "/static/img/projects/eatCandies.png",
-            	link: "https://github.com/FYJen/eat-candies",
-            	tasks: [
-                	"An interactive game to collect candies and dodge obstacles dropping from the sky",
-                	"Built with Python and Pygame engine"
-            	]
-        	}]
+        	},
+        		.....
+        	]
     	}]
 	}
 	```
@@ -282,16 +264,210 @@ Example:
 	}
 	```
 
-#### ```GET /api/address/```
-Retrieve address information.
+#### ```GET /api/tag/```
+Retrieve tag information.
 
-- `index`: /api/workplace/<`int:id`>
-- `find`: /api/workplace/?<`boolean:active`; `string:country`; `string:postalCode`; `string:zipCode`; `boolean:stringnify`>
-- `deref` fields: `occupants`
+- `index`: /api/tag/<`int:id`>
+- `find`: /api/tag/?<`string:name`>
+- `deref` fields: `skill`
 
 Example:
 
-- /api/address/1
+- /api/tag/5
+	
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 5,
+        	tagName: "Python"
+    	}]
+	}
+	```
+- /api/tag/?name=Server&deref=skill
+
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 7,
+        	tagName: "Server",
+        	skills: [{
+            	id: 30,
+            	description: "Apache"
+        	}, {
+            	id: 31,
+            	description: "Nginx"
+        	}, {
+            	id: 32,
+            	description: "DNS"
+        	}, {
+            	id: 33,
+            	description: "HAproxy"
+        	}, {
+           		id: 34,
+            	description: "Jenkins CI Server"a
+        	}, {
+            	id: 35,
+            	description: "Azkaban Server"
+        	}]
+    	}]
+	}
+	```
+
+#### ```GET /api/skill/```
+Retrieve skill information.
+
+- `index`: /api/skill/<`int:id`>
+- `find`: /api/skill/?<`string:description`; `string:tag`; `int:userId`>
+- `deref` fields: `user` and `tag`
+
+Example:
+
+- /api/skill/5
+	
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 5,
+        	description: "MySQL"
+    	}]
+	}
+	```
+- /api/skill/?userId=1&deref=user&deref=tag
+
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+          
+          	....
+      
+    	}, {
+        	id: 4,
+        	description: "SQLite",
+        	user: "fjen@uwaterloo.ca",
+        	tag: "Database"
+    	}, {
+        	id: 5,
+        	description: "MySQL",
+        	user: "fjen@uwaterloo.ca",
+        	tag: "Database"
+    	}, {
+        	id: 6,
+        	description: "PostgreSQL",
+        	user: "fjen@uwaterloo.ca",
+        	tag: "Database"
+    	}, {
+        	id: 7,
+        	description: "Feature implementations, APIs, performance optimizations and bug fixes",
+        	user: "fjen@uwaterloo.ca",
+        	tag: "Python"
+    	}, {
+    	
+    		....
+    
+    	}]
+	}
+	```
+
+#### ```GET /api/school/```
+Retrieve school information.
+
+- `index`: /api/school/<`int:id`>
+- `find`: /api/school/?<`string:name`; `string:level`; `string:attending`>
+- `deref` fields: `address` and `course` (currently not supported)
+
+Example:
+
+- /api/school/1
+	
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 1,
+        	name: "University of Waterloo",
+        	level: "University/College",
+        	degree: "Bachelor of Computer Science",
+        	major: "Computer Science",
+        	minor: "Economics",
+        	joint: null,
+        	startDate: "9/2010",
+        	endDate: "8/2015",
+        	attending: true,
+        	term: "4A"
+    	}]
+	}
+	```
+- /api/school/?attending=true&deref=address
+
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 1,
+       		name: "University of Waterloo",
+        	level: "University/College",
+        	degree: "Bachelor of Computer Science",
+        	major: "Computer Science",
+        	minor: "Economics",
+        	joint: null,
+        	startDate: "9/2010",
+        	endDate: "8/2015",
+        	attending: true,
+        	term: "4A",
+        	address: [{
+            	id: 2,
+            	Apt / Suite / Floor: "",
+            	streetName: "200 University Ave W.",
+            	city: "Waterloo",
+            	province / state: "ON",
+            	country: "Canada",
+            	postalCode / zip: "N2L 3G1",
+            	active: true,
+            	occupants: [],
+            	stringnifyAddr: "200 University Ave W., Waterloo, ON, Canada, N2L 3G1"
+        	}]
+    	}]
+	}
+	```
+
+#### ```GET /api/project/```
+Retrieve project information.
+
+- `index`: /api/project/<`int:id`>
+- `find`: /api/project/?<`string:projectName`>
+- `deref` fields: `user` and `tasks`
+
+Example:
+
+- /api/project/1
 	
 	```
 	{
@@ -302,18 +478,15 @@ Example:
     	},
     	result: {
         	id: 1,
-        	Apt / Suite / Floor: "Suite 302",
-        	streetName: "321 Lester St.",
-        	city: "Waterloo",
-        	province / state: "ON",
-        	country: "Canada",
-        	postalCode / zip: "N2L 3W6",
-        	active: true,
-        	occupants: []
+        	name: "Personal Website",
+        	startDate: "7/2014",
+        	endDate: null,
+        	thumbnail: "/static/img/projects/personal_website.png",
+        	link: "https://github.com/FYJen/website"
     	}
 	}
 	```
-- /api/address/?active=1&country=USA&deref=occupants&stringnify=true
+- /api/school/?attending=true&deref=address
 
 	```
 	{
@@ -323,18 +496,61 @@ Example:
         	statusCode: "HTTPOk"
     	},
     	result: [{
-        	id: 3,
-        	Apt / Suite / Floor: "4th Floor",
-        	streetName: "153 Kearny St.",
-        	city: "San Francisco",
-        	province / state: "CA",
-        	country: "USA",
-        	postalCode / zip: "94108",
-        	active: true,
-        	occupants: [
-            	"Inkling"
-        	],
-        	stringnifyAddr: "4th Floor, 153 Kearny St., San Francisco, CA, USA, 94108"
+        	id: 1,
+        	name: "Personal Website",
+        	startDate: "7/2014",
+        	endDate: null,
+        	thumbnail: "/static/img/projects/personal_website.png",
+        	link: "https://github.com/FYJen/website",
+        	tasks: [
+            	"Implemented RESTful API to serve internal requests",
+            	"Hosted on AWS and built with Python, Flask framework, SQLAlchemy, Jinja2 Template, Redis, SQLite, Bootstrap, HTML, CSS, Nginx and uWSGI"
+        	]
+    	}]
+	}
+	```
+
+#### ```GET /api/projecttask/```
+Retrieve project task information.
+
+- `index`: /api/projecttask/<`int:id`>
+- `find`: /api/projecttask/?<`string:projectName`>
+- `deref` fields: `project`
+
+Example:
+
+- /api/projecttask/1
+	
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: {
+        	id: 1,
+        	description: "An application that will curl a given YouTube playlist and download individual songs by posting requests to youtube-mp3.org"
+    	}
+	}
+	```
+- /api/projecttask/?projectName=YouTube%20Playlist%20Curler&deref=project
+
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 1,
+        	description: "An application that will curl a given YouTube playlist and download individual songs by posting requests to youtube-mp3.org",
+        project: "YouTube Playlist Curler"
+    	}, {
+        	id: 2,
+        	description: "Built with Python and Google YouTube Data API (V3)",
+        	project: "YouTube Playlist Curler"
     	}]
 	}
 	```
