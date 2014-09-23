@@ -17,11 +17,15 @@ div #ajen-container h3.work, div #ajen-container h3.project{
     margin-top: 12px;
 }
 
-div #ajen-container h2 {
+div #ajen-container h2{
     font-size: 100%;
     font-weight: bold;
     margin-bottom: 7px;
     margin-left: 2em;
+}
+
+div #ajen-container h2.summary {
+    margin-bottom: 12px;
 }
 
 div #ajen-container ul {
