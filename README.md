@@ -119,30 +119,170 @@ Example:
     	}]
 	}
 	```
-- /api/user/2
-
-	```
-	{
-    	status: {
-        	statusMsg: "No user found with Id - 2",
-        	statusDetails: {},
-        	statusCode: "ResourceNotFound"
-    	},
-    	result: {}
-	}
-	```
 
 ### ```GET /api/workplace/```
-Retrieve work place information.
+Retrieve work places information.
 
 - `index`: /api/workplace/<`int:id`>
 - `find`: /api/workplace/?<`string:name`; `string:initial`; `string:positionTitle`>
 - `deref` fields: `user`, `tasks`, and `address`
 
+Example:
 
+- /api/workplace/2
+	
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: {
+        	id: 3,
+        	name: "Ontario Institute for Cancer Research",
+        	initial: "OICR",
+        	positionTitle: "Cloud Computing Software Developer",
+        	startDate: "1/2013",
+        	endDate: "4/2013",
+        	web_link: "http://www.oicr.on.ca"
+    	}
+	}
+	```
+- /api/workplace/?initial=OICR&deref=user&deref=tasks
 
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 3,
+        	name: "Ontario Institute for Cancer Research",
+        	initial: "OICR",
+        	positionTitle: "Cloud Computing Software Developer",
+        	startDate: "1/2013",
+        	endDate: "4/2013",
+        	web_link: "http://www.oicr.on.ca",
+        	user: "fjen@uwaterloo.ca",
+        	tasks: [
+            	"Improved software Installation time by 80% using Bash",
+            	"Built applications to deploy scalable SGE Cluster with NFS on GCE using Perl",
+            	"Created generic application to launch scalable environments on AWS"
+        	]
+    	}]
+	}
+	```
 
-##Databas
+### ```GET /api/worktask/```
+Retrieve work tasks information.
+
+- `index`: /api/workplace/<`int:id`>
+- `find`: /api/workplace/?<`string:workPlaceName`; `string:initial`>
+- `deref` fields: `workplace`
+
+Example:
+
+- /api/worktask/11
+	
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: {
+        	id: 11,
+        	description: "Implemented load-balancer using HAproxy, Dstat and third-party libraries"
+    	}
+	}
+	```
+- /api/worktask/?initial=NCHC&deref=workplace
+
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 10,
+        	description: "Configured DNS with geo-location feature to distribute client connections",
+        	workPlace: "National Center for High-Performance Computing"
+    	}, {
+        	id: 11,
+        	description: "Implemented load-balancer using HAproxy, Dstat and third-party libraries",
+        	workPlace: "National Center for High-Performance Computing"
+    	}, {
+        	id: 12,
+        	description: "Co-Developed nation-wide Cloud storage service",
+        	workPlace: "National Center for High-Performance Computing"
+    	}]
+	}
+	```
+
+### ```GET /api/address/```
+Retrieve address information.
+
+- `index`: /api/workplace/<`int:id`>
+- `find`: /api/workplace/?<`boolean:active`; `string:country`; `string:postalCode`; `string:zipCode`; `boolean:stringnify`>
+- `deref` fields: `occupants`
+
+Example:
+
+- /api/address/1
+	
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: {
+        	id: 1,
+        	Apt / Suite / Floor: "Suite 302",
+        	streetName: "321 Lester St.",
+        	city: "Waterloo",
+        	province / state: "ON",
+        	country: "Canada",
+        	postalCode / zip: "N2L 3W6",
+        	active: true,
+        	occupants: []
+    	}
+	}
+	```
+- /api/address/?active=1&country=USA&deref=occupants&stringnify=true
+
+	```
+	{
+    	status: {
+        	statusMsg: "OK",
+        	statusDetails: {},
+        	statusCode: "HTTPOk"
+    	},
+    	result: [{
+        	id: 3,
+        	Apt / Suite / Floor: "4th Floor",
+        	streetName: "153 Kearny St.",
+        	city: "San Francisco",
+        	province / state: "CA",
+        	country: "USA",
+        	postalCode / zip: "94108",
+        	active: true,
+        	occupants: [
+            	"Inkling"
+        	],
+        	stringnifyAddr: "4th Floor, 153 Kearny St., San Francisco, CA, USA, 94108"
+    	}]
+	}
+	```
+
+##Database
 
 
 ##Deployment
