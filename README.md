@@ -3,7 +3,6 @@
 This is a personal website that I built to exhibit my interests, projects and latest resume. In fact, this website is a by-product of RESTful API that I built underneath it. The website is hosted on AWS. Since I work most comfortably with Python, I choose Flask as my web framework and SQLAlchemy ORM as toolkit to interact with database. Nginx and Supervisor(uWSGI) are used to host the web server and keep it alive. I am currently working on Redis and Docker integration to make data retrieval faster and deployment smoother.
 
 ##RESTful API
-==============
 The RESTful API is built around personal information on my resume. The API includes the following categories:
 
 - `user`: A user is a single entity containing basic personal information.
@@ -144,8 +143,8 @@ Retrieve work place information.
 
 
 ##Databas
-==========
+
 
 ##Deployment
-============
+
   
