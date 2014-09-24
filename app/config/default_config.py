@@ -1,5 +1,5 @@
 BASE_PAGE = {
-    'Name': 'Fei-Yang Jen',
+    'Name': 'Fei-Yang (Arthur) Jen',
     'About': 'About',
     'Resume': 'Resume',
     'Projects': 'Projects',
