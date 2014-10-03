@@ -89,7 +89,7 @@
             <h2>Projects</h2>
 
             {% for project in resume.projects %}
-                <h3 class='project'>{{project.name}}</h3>
+                <h3 class='project'><a href='{{project.link}}' target='_blank'>{{project.name}}</a></h3>
                 <ul>
                     {% for task in project.tasks %}
                         <li>{{task}}</li>
