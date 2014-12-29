@@ -144,7 +144,7 @@ WORKTASK_LIST = {
     'Awareness_intern': [
         'Implemented a private Cloud with CloudStack and LDAP to provide IaaS locally',
         'Deployed scalable Cloud environment with Alarm Clock, SQS, S3 and Load-Balance on AWS',
-        'o  Performed benchmarking of database and disk I/O on Amazon and RackSpace'
+        'Performed benchmarking of database and disk I/O on Amazon and RackSpace'
     ],
     'NCHC_intern': [
         'Configured DNS with geo-location feature to distribute client connections',
