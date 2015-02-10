@@ -51,6 +51,14 @@ ADDRESS_LIST = {
         'postalcode_zip': 'L7L 5Y7',
         'country': 'Canada',
         'active': False
+    },
+    'Yelp_address': {
+        'id': 7,
+        'street_name': '140 Montgomery St.',
+        'city': 'San Francisco',
+        'province_state': 'CA',
+        'postalcode_zip': '94105',
+        'country': 'USA'
     }
 }
 
@@ -70,9 +78,19 @@ USER_LIST = {
     }
 }
 
-WORKPLACE_LIST = {
-    'inkling_intern_1': {
-        'id': 1,
+WORKPLACE_LIST = [
+    ('yelp_intern',
+     {
+        'name': 'Yelp Inc.',
+        'position_title': 'Software Engineering Intern',
+        'start_date': datetime(2015, 1, 5),
+        'end_date': datetime(2015, 5, 1),
+        'address_id': ADDRESS_LIST['Yelp_address']['id'],
+        'user_id': USER_LIST['main_user']['id'],
+        'web_link': 'http://www.yelp.com'
+     }),
+    ('inkling_intern_1',
+     {
         'name': 'Inkling',
         'position_title': 'Cloud Engineering Intern',
         'start_date': datetime(2014, 5, 1),
@@ -80,9 +98,9 @@ WORKPLACE_LIST = {
         'address_id': ADDRESS_LIST['inkling_address']['id'],
         'user_id': USER_LIST['main_user']['id'],
         'web_link': 'http://www.inkling.com'
-    },
-    'inkling_intern_2': {
-        'id': 2,
+     }),
+    ('inkling_intern_2',
+     {
         'name': 'Inkling',
         'position_title': 'Web Ops Engineering Intern',
         'start_date': datetime(2013, 9, 1),
@@ -90,9 +108,9 @@ WORKPLACE_LIST = {
         'address_id': ADDRESS_LIST['inkling_address']['id'],
         'user_id': USER_LIST['main_user']['id'],
         'web_link': 'http://www.inkling.com'
-    },
-    'OICR_intern': {
-        'id': 3,
+     }),
+    ('OICR_intern',
+     {
         'name': 'Ontario Institute for Cancer Research',
         'initial': 'OICR',
         'position_title': 'Cloud Computing Software Developer',
@@ -101,9 +119,9 @@ WORKPLACE_LIST = {
         'address_id': ADDRESS_LIST['OICR_address']['id'],
         'user_id': USER_LIST['main_user']['id'],
         'web_link': 'http://www.oicr.on.ca'
-    },
-    'Awareness_intern': {
-        'id': 4,
+     }),
+    ('Awareness_intern',
+     {
         'name': 'Awareness Inc.',
         'position_title': 'Cloud Operation Analyst',
         'start_date': datetime(2012, 5, 1),
@@ -111,9 +129,9 @@ WORKPLACE_LIST = {
         'address_id': ADDRESS_LIST['Awareness_address']['id'],
         'user_id': USER_LIST['main_user']['id'],
         'web_link': 'http://www.awarenesshub.com'
-    },
-    'NCHC_intern': {
-        'id': 5,
+     }),
+    ('NCHC_intern',
+     {
         'name': 'National Center for High-Performance Computing',
         'initial': 'NCHC',
         'position_title': 'Project Engineering Assistant',
@@ -122,10 +140,13 @@ WORKPLACE_LIST = {
         'address_id': ADDRESS_LIST['NCHC_address']['id'],
         'user_id': USER_LIST['main_user']['id'],
         'web_link': 'http://www.nchc.org.tw/en'
-    }
-}
+     })
+]
 
 WORKTASK_LIST = {
+    'yelp_intern': [
+        'Created metric with Elasticsearch and Kibana to provide insight on business data.'
+    ],
     'inkling_intern_1': [
         'Implemented several features in the backend services of Inkling Habitat using Python and Ruby',
         'Refactored the workflow for publishing books to the Inkling Store',
