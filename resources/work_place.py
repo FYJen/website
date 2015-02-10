@@ -1,3 +1,4 @@
+import datetime
 from collections import OrderedDict
 
 from dbmodels import models
@@ -89,7 +90,10 @@ class Workplace(object):
         """
         def formatDate(dateTime):
             try:
-                return str(dateTime.month) + '/' + str(dateTime.year)
+                now = datetime.datetime.today()
+                return_val = str(dateTime.month) + '/' + str(dateTime.year) if \
+                              dateTime < now else 'Present'
+                return return_val
             except Exception:
                 return None
 
