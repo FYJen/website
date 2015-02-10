@@ -104,7 +104,7 @@
             {% set school = resume.schools[0] %}
             <h3>Candidate for Honours {{school.degree}}</h3>
             <ul>
-                <li><a href='https://uwaterloo.ca/'>{{school.name}}</a>, {{school.address[0]['province/state']}}, {{school.startDate}} - Present</li>
+                <li><a href='https://uwaterloo.ca/'>{{school.name}}</a>, {{school.address[0]['province/state']}}, {{school.startDate}} - {{school.endDate}}</li>
             </ul>
             <!-- Education -->
         {% endif%}
