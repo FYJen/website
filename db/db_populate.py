@@ -13,21 +13,30 @@ class Populate(object):
             db.session.add(entry)
 
     @classmethod
-    def workPlace(cls):
-        for workplace in WORKPLACE_LIST.values():
-            entry = models.WorkPlace(**workplace)
-            db.session.add(entry)
-
-    @classmethod
-    def workTask(cls):
-        for k, v in WORKTASK_LIST.iteritems():
-            for task in v:
+    def workExperience(cls):
+        """Work Experience includes work places and work tasks.
+        """
+        def _add_workTask(work_key, _id):
+            """Helper method to add work tasks.
+            """
+            for task in WORKTASK_LIST[work_key]:
                 entry = {
                     'description': task,
-                    'workplace_id': WORKPLACE_LIST[k]['id']
+                    'workplace_id': _id
                 }
                 entry = models.WorkTask(**entry)
                 db.session.add(entry)
+
+        for _id, workplaceTuple in enumerate(WORKPLACE_LIST):
+            _id += 1
+            work_key, work_place = workplaceTuple
+
+            work_place['id'] = _id
+            workplace_entry = models.WorkPlace(**work_place)
+            db.session.add(workplace_entry)
+
+            # Add work tasks.
+            _add_workTask(work_key, _id)
 
     @classmethod
     def address(cls):
@@ -123,7 +132,7 @@ class RebuildDB(object):
         for method in dir(Populate):
             if not method.startswith('__'):
                 populateTable = getattr(Populate, method)
-                print 'Inserting data into %s table ...' % method
+                print 'Inserting data for %s ...' % method
                 populateTable()
 
         db.session.commit()
