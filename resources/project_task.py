@@ -54,9 +54,7 @@ class ProjectTask(object):
                                                  'query parameters',
                                                  details=query_params)
 
-        projectTasks = []
-        for project in projects:
-            projectTasks += project.project_tasks
+        projectTasks = [project.project_tasks for project in projects]
 
         return cls._to_Dict(projectTasks, deref)
 
